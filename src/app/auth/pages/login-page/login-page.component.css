@@ -1,0 +1,21 @@
+.fondo{
+  background-color: red;
+}
+
+.alto{
+  height: 80vh;
+}
+
+.example-form {
+  min-width: 150px;
+  max-width: 100%;
+  width: 100%;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.imagen{
+  width: 150px;
+}

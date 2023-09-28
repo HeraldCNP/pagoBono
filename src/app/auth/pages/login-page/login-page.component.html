@@ -1,1 +1,28 @@
-<p>login-page works!</p>
+<div class="row align-items-center alto">
+  <div class="col-md-6 offset-md-3">
+    <form class="example-form" [formGroup]="loginForm" (ngSubmit)="login()">
+      <mat-card class="">
+        <div class="text-center my-3">
+          <h1>Iniciar Sesion</h1>
+          <img src="assets/img/logo.png" alt="Logo Betanzos" class="imagen">
+        </div>
+        <mat-card-content>
+          <mat-form-field class="full-width">
+            <mat-label>Correo Electronico</mat-label>
+            <input type="email" matInput placeholder="Correo Electronico" formControlName="email">
+          </mat-form-field>
+
+          <mat-form-field class="full-width">
+            <mat-label>Contraseña</mat-label>
+            <input type="password" matInput placeholder="Contraseña" formControlName="password">
+          </mat-form-field>
+
+          <button mat-button mat-flat-button color="primary" class="full-width" [disabled]="loginForm.invalid">
+            <mat-icon>save</mat-icon>
+            Ingresar
+          </button>
+        </mat-card-content>
+      </mat-card>
+    </form>
+  </div>
+</div>
