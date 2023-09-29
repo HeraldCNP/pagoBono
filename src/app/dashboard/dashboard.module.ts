@@ -4,11 +4,13 @@ import { CommonModule } from '@angular/common';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { MaterialModule } from '../material/material.module';
 import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-layout.component';
+import { UserListComponent } from './pages/users/user-list/user-list.component';
 
 
 @NgModule({
   declarations: [
-    DashboardLayoutComponent
+    DashboardLayoutComponent,
+    UserListComponent
   ],
   imports: [
     CommonModule,
