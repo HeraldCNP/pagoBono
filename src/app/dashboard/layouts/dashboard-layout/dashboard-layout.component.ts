@@ -1,4 +1,5 @@
 import { Component, inject, computed } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
@@ -8,6 +9,7 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 })
 export class DashboardLayoutComponent {
   private authService = inject(AuthService)
+  private router = inject(Router)
   public user = computed(() => this.authService.currentUser());
 
   constructor() {
@@ -16,7 +18,8 @@ export class DashboardLayoutComponent {
 
 
   public sidebarItems = [
-    { label: 'listado', icon: 'label', url: './list' },
+    { label: 'Usuarios', icon: 'label', url: './users' },
+    { label: 'Beneficiarios', icon: 'label', url: './beneficiaries' },
 
     // { label: 'listado', icon: 'label', url: './list' }
     // { label: 'listado', icon: 'label', url: './list' }
@@ -24,5 +27,6 @@ export class DashboardLayoutComponent {
 
   onLogout() {
     this.authService.logout();
+    this.router.navigateByUrl('/auth/login');
   }
 }

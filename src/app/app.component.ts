@@ -12,23 +12,23 @@ export class AppComponent {
   private authService = inject(AuthService);
   private router = inject(Router)
 
-  public finishedAuthCheck = computed<boolean>(() => {
-    if (this.authService.authStatus() === AuthStatus.checking) {
-      return false;
-    }
-    return true;
-  })
+  // public finishedAuthCheck = computed<boolean>(() => {
+  //   if (this.authService.authStatus() === AuthStatus.checking) {
+  //     return false;
+  //   }
+  //   return true;
+  // })
 
-  public authStatusChangedEffect = effect(() => {
-    switch (this.authService.authStatus()) {
-      case AuthStatus.checking:
-        return;
-      case AuthStatus.autheticated:
-        this.router.navigateByUrl('/dashboard');
-        return;
-      case AuthStatus.notAuthenticated:
-        this.router.navigateByUrl('/auth/login');
-        return;
-    }
-  })
+  // public authStatusChangedEffect = effect(() => {
+  //   switch (this.authService.authStatus()) {
+  //     case AuthStatus.checking:
+  //       return;
+  //     case AuthStatus.autheticated:
+
+  //       return;
+  //     case AuthStatus.notAuthenticated:
+  //       this.router.navigateByUrl('/auth/login');
+  //       return;
+  //   }
+  // })
 }

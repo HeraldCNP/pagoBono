@@ -12,9 +12,9 @@ import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component
 
 @NgModule({
   declarations: [
+    AuthLayoutComponent,
     LoginPageComponent,
     RegisterPageComponent,
-    AuthLayoutComponent
   ],
   imports: [
     CommonModule,

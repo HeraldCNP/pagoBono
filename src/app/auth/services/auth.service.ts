@@ -68,8 +68,10 @@ export class AuthService {
         catchError(() => {
           this._authStatus.set(AuthStatus.notAuthenticated);
           return of(false);
+          console.log('error', this._authStatus());
         })
       )
+
   }
 
   logout() {
@@ -77,4 +79,6 @@ export class AuthService {
     this._currentUser.set(null);
     this._authStatus.set(AuthStatus.notAuthenticated);
   }
+
+
 }

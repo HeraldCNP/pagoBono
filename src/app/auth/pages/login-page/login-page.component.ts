@@ -10,9 +10,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./login-page.component.css']
 })
 export class LoginPageComponent {
-  private fb          = inject(FormBuilder);
+  private fb = inject(FormBuilder);
   private authService = inject(AuthService);
-  private router      = inject(Router)
+  private router = inject(Router)
 
   public loginForm: FormGroup = this.fb.group({
     email: ['admin@gmail.com', [Validators.required, Validators.email]],

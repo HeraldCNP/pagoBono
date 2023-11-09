@@ -1,0 +1,59 @@
+<form class="user-form" [formGroup]="userForm" (ngSubmit)="saveUser()">
+  <h2 mat-dialog-title>{{ inputData.title }}</h2>
+  <mat-dialog-content class="mat-typography">
+
+    <mat-card class="">
+      <mat-card-content>
+        <!-- <mat-form-field class="full-width">
+          <mat-label>Correo Electronico</mat-label>
+          <input type="email" matInput placeholder="Correo Electronico" formControlName="email">
+        </mat-form-field> -->
+
+        <mat-form-field class="full-width">
+          <mat-label>Correo Electronico</mat-label>
+          <input matInput placeholder="pat@example.com" formControlName="email" type="email">
+          <mat-icon matSuffix>mail</mat-icon>
+          <mat-error *ngIf="form['email'].hasError('required') && form['email'].touched">
+            El Correo Electronico es obligatorio.
+          </mat-error>
+          <mat-error *ngIf="form['email'].hasError('email') && form['email'].touched">
+            El Correo Electronico de ser valido.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label>Nombre Completo</mat-label>
+          <input type="text" matInput placeholder="Nombre Completo" formControlName="name">
+          <mat-icon matSuffix>person</mat-icon>
+
+          <mat-error *ngIf="form['name'].hasError('required') && form['name'].touched">
+            El Nombre Completo es obligatorio.
+          </mat-error>
+          <mat-error *ngIf="form['name'].hasError('minlength') && form['name'].touched">
+            El Nombre Completo debe tener minimo 6 caracteres.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label>Contraseña</mat-label>
+          <input type="password" matInput placeholder="Contraseña" formControlName="password">
+          <mat-icon matSuffix>password</mat-icon>
+          <mat-error *ngIf="form['password'].hasError('required') && form['password'].touched">
+            La Contraseña es obligatoria.
+          </mat-error>
+          <mat-error *ngIf="form['password'].hasError('minlength') && form['password'].touched">
+            La Contraseña debe tener minimo 6 caracteres.
+          </mat-error>
+        </mat-form-field>
+
+      </mat-card-content>
+    </mat-card>
+
+  </mat-dialog-content>
+  {{userForm.value | json}}
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-raised-button color="primary" [disabled]="userForm.invalid"
+      type="submit"><mat-icon>save</mat-icon>Registrar</button>
+  </mat-dialog-actions>
+</form>
