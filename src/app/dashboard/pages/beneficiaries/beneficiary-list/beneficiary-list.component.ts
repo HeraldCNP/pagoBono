@@ -15,6 +15,7 @@ import { Beneficiary } from 'src/app/dashboard/interfaces/beneficiary';
 })
 export class BeneficiaryListComponent {
   constructor(private matDialog: MatDialog) {
+
   }
 
 
@@ -30,23 +31,73 @@ export class BeneficiaryListComponent {
 
 
   ngOnInit(): void {
-    this.cargarBeneficiaries()
+    this.cargarBeneficiaries();
   }
 
-  openDialog() {
+  editBeneficiary(id: any) {
+    this.openDialog(id, 'Editar Beneficiario')
+  }
+
+  createBeneficiary() {
+    this.openDialog(0, 'Crear Beneficiario')
+  }
+
+  deleteBeneficiary(id: any) {
+    Swal.fire({
+      title: "Estas seguro?",
+      text: "¡No podrás revertir esto!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "¡Sí, bórralo!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.beneficiaryService.deleteBeneficiary(id)
+        .subscribe({
+          next: () => {
+            this.cargarBeneficiaries();
+          },
+          error: (message: string | undefined) => {
+            Swal.fire('Error', message, 'error')
+          }
+        })
+        Swal.fire({
+          title: "¡Eliminado!",
+          text: "Beneficiario ha sido eliminado.",
+          icon: "success"
+        });
+      }
+    });
+
+  }
+
+  openDialog(id: any, title: any) {
     let dialog = this.matDialog.open(FormBeneficiaryComponent, {
       width: '600px',
       enterAnimationDuration: '500ms',
       exitAnimationDuration: '1000ms',
       data: {
-        title: 'Crear Beneficiario'
+        id: id,
+        title: title,
       }
     });
-    dialog.afterClosed().subscribe(beneficiary => {
-      console.log('user', beneficiary);
-      if(beneficiary){
-        this.cargarBeneficiaries();
-        Swal.fire('Bien',`Usuario ${beneficiary.user.name} Creado Correctamente`, 'success')
+    dialog.afterClosed().subscribe({
+      next: (resp: any) => {
+        if (resp == 'edited') {
+          this.cargarBeneficiaries();
+          Swal.fire('Bien', `Beneficiario Editado Correctamente`, 'success')
+        }
+
+        if(resp == 'created'){
+          this.cargarBeneficiaries();
+          Swal.fire('Bien', `Beneficiario Creado Correctamente`, 'success')
+        }
+      },
+      error: (resp: any) => {
+        console.log(resp.error.message);
+        // Swal.fire('Error', resp, 'error')
+        // Swal.fire('Error', resp, 'error')
       }
     })
   }
@@ -56,7 +107,7 @@ export class BeneficiaryListComponent {
       .subscribe({
         next: (data: any) => {
           this.beneficiaries.set(data);
-          console.log(this.beneficiaries());
+          // console.log(this.beneficiaries());
           this.dataSource = new MatTableDataSource(this.beneficiaries());
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
@@ -76,4 +127,8 @@ export class BeneficiaryListComponent {
       this.dataSource.paginator.firstPage();
     }
   }
+
+
+
+
 }

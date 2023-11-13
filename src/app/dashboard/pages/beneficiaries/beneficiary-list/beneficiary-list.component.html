@@ -6,7 +6,7 @@
         <mat-card-subtitle>End</mat-card-subtitle>
         <span class="spacer"></span>
         <mat-dialog-actions >
-          <button mat-mini-fab matTooltip="Crear Nuevo" color="primary" aria-label="Example mini fab with a heart icon" (click)="openDialog()">
+          <button mat-mini-fab matTooltip="Crear Nuevo" color="primary" aria-label="Example mini fab with a heart icon" (click)="createBeneficiary()">
             <mat-icon>add</mat-icon>
           </button>
         </mat-dialog-actions>
@@ -44,13 +44,14 @@
 
           <ng-container matColumnDef="fechaNacimiento">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha de Nacimiento</th>
-            <td mat-cell *matCellDef="let row">{{ row.fechaNacimiento }}</td>
+            <td mat-cell *matCellDef="let row">{{ row.fechaNacimiento | date : "longDate" : "UTC" }}</td>
           </ng-container>
 
           <ng-container matColumnDef="carnetFechaVencimiento">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Vencimiento Carnet</th>
-            <td mat-cell *matCellDef="let row">{{ row.carnetFechaVencimiento }}</td>
+            <td mat-cell *matCellDef="let row">{{ row.carnetFechaVencimiento | date : "longDate" : "UTC" }}</td>
           </ng-container>
+
 
           <ng-container matColumnDef="celular">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Celular</th>
@@ -75,10 +76,10 @@
           <ng-container matColumnDef="acciones">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
             <td mat-cell *matCellDef="let row">
-              <button mat-icon-button matTooltip="Editar" aria-label="Example icon-button with a heart icon">
+              <button (click)="editBeneficiary(row._id)" mat-icon-button matTooltip="Editar" aria-label="Example icon-button with a heart icon">
                 <mat-icon>edit</mat-icon>
               </button>
-              <button mat-icon-button matTooltip="Eliminar" aria-label="Example icon-button with a heart icon">
+              <button (click)="deleteBeneficiary(row._id)" mat-icon-button matTooltip="Eliminar" aria-label="Example icon-button with a heart icon">
                 <mat-icon>delete</mat-icon>
               </button>
             </td>

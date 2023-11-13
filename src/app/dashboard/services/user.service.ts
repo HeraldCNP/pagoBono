@@ -47,14 +47,14 @@ export class UserService {
   }
 
   getUserById(id:any){
-    const url = `${this.baseUrl}/auth`;
+    const url = `${this.baseUrl}/auth/${id}`;
     const token = localStorage.getItem('token');
     if (!token) {
       this.authService.logout();
     }
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     // console.log(url);
-
-    return this.http.get<any>(url+id, { headers });
+    return this.http.get<any>(url);
+    // return this.http.get<any>(url+id, { headers });
   }
 }

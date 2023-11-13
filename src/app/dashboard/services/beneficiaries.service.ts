@@ -46,8 +46,8 @@ export class BeneficiariesService {
     // return this.http.post<any>(url, data, { headers });
   }
 
-  getUserById(id:any){
-    const url = `${this.baseUrl}/auth`;
+  getBeneficiaryById(id:any){
+    const url = `${this.baseUrl}/persona/${id}`;
     const token = localStorage.getItem('token');
     if (!token) {
       this.authService.logout();
@@ -55,6 +55,38 @@ export class BeneficiariesService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     // console.log(url);
 
-    return this.http.get<any>(url+id, { headers });
+    return this.http.get<any>(url);
+    // return this.http.get<any>(url+id, { headers });
+  }
+
+  // editBeneficiary(form: any, id: any): Observable<any> {
+  //   let dir = `${this.URL}/proveedor/${id}`;
+  //   return this.http.put<any>(dir, form)
+  // }
+
+  editBeneficiary(data: any, id: any): Observable<any> {
+    const url = `${this.baseUrl}/persona/${id}`;
+    const token = localStorage.getItem('token');
+    if (!token) {
+      this.authService.logout();
+    }
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    // console.log(url);
+
+    return this.http.patch<any>(url, data);
+    // return this.http.post<any>(url, data, { headers });
+  }
+
+  deleteBeneficiary(id: any): Observable<any> {
+    const url = `${this.baseUrl}/persona/${id}`;
+    const token = localStorage.getItem('token');
+    if (!token) {
+      this.authService.logout();
+    }
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    // console.log(url);
+
+    return this.http.delete<any>(url);
+    // return this.http.post<any>(url, { headers });
   }
 }
