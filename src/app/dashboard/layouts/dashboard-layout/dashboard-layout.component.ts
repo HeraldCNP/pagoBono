@@ -20,6 +20,8 @@ export class DashboardLayoutComponent {
   public sidebarItems = [
     { label: 'Usuarios', icon: 'label', url: './users' },
     { label: 'Beneficiarios', icon: 'label', url: './beneficiaries' },
+    { label: 'BD', icon: 'label', url: './db' },
+    { label: 'Planillas', icon: 'label', url: './planillas' },
 
     // { label: 'listado', icon: 'label', url: './list' }
     // { label: 'listado', icon: 'label', url: './list' }

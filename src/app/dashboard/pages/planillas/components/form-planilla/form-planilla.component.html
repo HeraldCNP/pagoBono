@@ -1,0 +1,70 @@
+<form class="create-form" [formGroup]="planillaForm">
+  <h2 mat-dialog-title>{{ inputData.title }}</h2>
+  <mat-dialog-content class="mat-typography">
+
+    <mat-card class="">
+      <mat-card-content>
+        <!-- <mat-form-field class="full-width">
+          <mat-label>Correo Electronico</mat-label>
+          <input type="email" matInput placeholder="Correo Electronico" formControlName="email">
+        </mat-form-field> -->
+
+        <mat-form-field class="full-width">
+          <mat-label>Gestion</mat-label>
+          <mat-select formControlName="gestion">
+            <mat-option *ngFor="let gestion of gestiones" [value]="gestion.value">
+              {{gestion.label}}
+            </mat-option>
+          </mat-select>
+          <mat-icon matSuffix>calendar_month</mat-icon>
+          <mat-error *ngIf="form['gestion'].hasError('required') && form['gestion'].touched">
+            La Gestion es obligatoria.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label>Mes</mat-label>
+          <mat-select formControlName="mes">
+            <mat-option *ngFor="let mes of meses" [value]="mes.value">
+              {{mes.label}}
+            </mat-option>
+          </mat-select>
+          <mat-icon matSuffix>calendar_month</mat-icon>
+          <mat-error *ngIf="form['mes'].hasError('required') && form['mes'].touched">
+            El Mes es obligatorio.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <input matInput [value]="fileName" />
+          <input type="file" id="fileInput" (change)="selectFile($event)" name="fileInput" />
+        </mat-form-field>
+
+
+
+
+
+        <!-- <mat-form-field class="full-width">
+          <mat-label>Contraseña</mat-label>
+          <input type="password" matInput placeholder="Contraseña" formControlName="password">
+          <mat-icon matSuffix>password</mat-icon>
+          <mat-error *ngIf="form['password'].hasError('required') && form['password'].touched">
+            La Contraseña es obligatoria.
+          </mat-error>
+          <mat-error *ngIf="form['password'].hasError('minlength') && form['password'].touched">
+            La Contraseña debe tener minimo 6 caracteres.
+          </mat-error>
+        </mat-form-field> -->
+
+      </mat-card-content>
+    </mat-card>
+
+  </mat-dialog-content>
+  {{planillaForm.value | json}}
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button (click)="(upload())" *ngIf="inputData.id == 0" mat-raised-button color="primary"
+      [disabled]="planillaForm.invalid"><mat-icon>save</mat-icon>Registrar</button>
+
+  </mat-dialog-actions>
+</form>

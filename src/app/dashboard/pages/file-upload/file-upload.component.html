@@ -1,0 +1,25 @@
+<div class="row p-2">
+  <div class="col-md-12">
+
+    <div *ngIf="currentFile" class="progress-bar">
+      <mat-progress-bar color="accent" [value]="progress"></mat-progress-bar>
+      <span class="progress">{{ progress }}%</span>
+    </div>
+
+    <mat-form-field class="full">
+      <input matInput [value]="fileName" />
+
+      <input type="file" id="fileInput" (change)="selectFile($event)" name="fileInput" />
+    </mat-form-field>
+    <button mat-flat-button color="primary" [disabled]="!currentFile" (click)="upload()">
+      Cargar
+    </button>
+
+
+    <div *ngIf="message" class="message">
+      {{ message }}
+    </div>
+
+
+  </div>
+</div>
