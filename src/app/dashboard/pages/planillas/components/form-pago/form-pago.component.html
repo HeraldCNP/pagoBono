@@ -1,0 +1,55 @@
+<form class="create-form" [formGroup]="pagoForm">
+  <h2 mat-dialog-title>{{ inputData.title }}</h2>
+  <mat-dialog-content class="mat-typography">
+
+    <mat-card class="">
+      <mat-card-content>
+        <!-- <mat-form-field class="full-width">
+          <mat-label>Correo Electronico</mat-label>
+          <input type="email" matInput placeholder="Correo Electronico" formControlName="email">
+        </mat-form-field> -->
+
+
+        <mat-form-field class="full-width">
+          <mat-label>Fecha de Pago</mat-label>
+          <input matInput [matDatepicker]="fecha" formControlName="fecha">
+          <mat-hint>DD/MM/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="fecha"></mat-datepicker-toggle>
+          <mat-datepicker #fecha></mat-datepicker>
+        </mat-form-field>
+
+
+        <mat-form-field class="full-width">
+          <mat-label>Monto</mat-label>
+          <input type="number" matInput placeholder="Monto" formControlName="monto">
+        </mat-form-field>
+
+
+
+
+
+
+
+        <!-- <mat-form-field class="full-width">
+          <mat-label>Contraseña</mat-label>
+          <input type="password" matInput placeholder="Contraseña" formControlName="password">
+          <mat-icon matSuffix>password</mat-icon>
+          <mat-error *ngIf="form['password'].hasError('required') && form['password'].touched">
+            La Contraseña es obligatoria.
+          </mat-error>
+          <mat-error *ngIf="form['password'].hasError('minlength') && form['password'].touched">
+            La Contraseña debe tener minimo 6 caracteres.
+          </mat-error>
+        </mat-form-field> -->
+
+      </mat-card-content>
+    </mat-card>
+
+  </mat-dialog-content>
+  {{pagoForm.value | json}}
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button (click)="(registerPago())" mat-raised-button color="primary"
+      [disabled]="pagoForm.invalid"><mat-icon>save</mat-icon>Registrar</button>
+  </mat-dialog-actions>
+</form>

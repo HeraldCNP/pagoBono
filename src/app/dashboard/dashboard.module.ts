@@ -12,6 +12,8 @@ import { FormBeneficiaryComponent } from './pages/beneficiaries/components/form-
 import { FileUploadComponent } from './pages/file-upload/file-upload.component';
 import { PlanillasComponent } from './pages/planillas/planillas.component';
 import { FormPlanillaComponent } from './pages/planillas/components/form-planilla/form-planilla.component';
+import { ListaPlanillaComponent } from './pages/planillas/lista/lista-planilla/lista-planilla.component';
+import { FormPagoComponent } from './pages/planillas/components/form-pago/form-pago.component';
 
 
 @NgModule({
@@ -23,7 +25,9 @@ import { FormPlanillaComponent } from './pages/planillas/components/form-planill
     FormBeneficiaryComponent,
     FileUploadComponent,
     PlanillasComponent,
-    FormPlanillaComponent
+    FormPlanillaComponent,
+    ListaPlanillaComponent,
+    FormPagoComponent
   ],
   imports: [
     CommonModule,

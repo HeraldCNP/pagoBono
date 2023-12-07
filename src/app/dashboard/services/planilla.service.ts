@@ -17,17 +17,41 @@ export class PlanillaService {
   formData:any;
   constructor() { }
 
-  getAllPlanillas(): Observable<any> {
-    const url = `${this.baseUrl}/planillas`;
+  get token(){
     const token = localStorage.getItem('token');
     if (!token) {
       this.authService.logout();
     }
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    // console.log(url);
-
-    return this.http.get<any>(url, { headers });
+    return token;
   }
+
+  get headers(){
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
+    return headers;
+  }
+
+  getAllPlanillas(): Observable<any> {
+    const url = `${this.baseUrl}/planillas`;
+    const header = this.headers;
+    // console.log(url);
+    return this.http.get<any>(url, { headers: header });
+  }
+
+  getPlanilla(id:string): Observable<any> {
+    const url = `${this.baseUrl}/planillas/${id}`;
+    const header = this.headers;
+    // console.log(url);
+    return this.http.get<any>(url, { headers: header });
+  }
+
+  registerPago(form:any): Observable<any> {
+    const url = `${this.baseUrl}/pagos/addPago`;
+    const header = this.headers;
+    // console.log(url);
+    return this.http.post<any>(url, form, { headers: header });
+  }
+
+
 
   upload(file: File, form:FormGroup): Observable<HttpEvent<any>> {
     const formData: FormData = new FormData();

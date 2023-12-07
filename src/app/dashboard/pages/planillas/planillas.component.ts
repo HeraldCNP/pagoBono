@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import { Planilla } from '../../interfaces/planilla';
 import { PlanillaService } from '../../services/planilla.service';
 import { FormPlanillaComponent } from './components/form-planilla/form-planilla.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-planillas',
@@ -19,8 +20,8 @@ export class PlanillasComponent {
   }
 
 
-  private planillaService = inject(PlanillaService)
-
+  private planillaService = inject(PlanillaService);
+  private router = inject(Router);
 
   displayedColumn: string[] = ['_id', 'gestion', 'mes', 'acciones'];
   dataSource!: MatTableDataSource<Planilla>
@@ -40,6 +41,35 @@ export class PlanillasComponent {
 
   createBeneficiary() {
     this.openDialog(0, 'Registrar Planilla')
+  }
+
+  openDialog(id: any, title: any) {
+    let dialog = this.matDialog.open(FormPlanillaComponent, {
+      width: '600px',
+      enterAnimationDuration: '500ms',
+      exitAnimationDuration: '1000ms',
+      data: {
+        id: id,
+        title: title,
+      }
+    });
+    dialog.afterClosed().subscribe({
+      next: (resp: any) => {
+        if (resp == 'edited') {
+          this.cargarPlanillas();
+          Swal.fire('Bien', `Beneficiario Editado Correctamente`, 'success')
+        }
+
+        if(resp == 'created'){
+          this.cargarPlanillas();
+          Swal.fire('Bien', `Planilla Creada Correctamente`, 'success')
+        }
+      },
+      error: (resp: any) => {
+        console.log(resp.error.message);
+
+      }
+    })
   }
 
   deleteBeneficiary(id: any) {
@@ -72,35 +102,6 @@ export class PlanillasComponent {
 
   }
 
-  openDialog(id: any, title: any) {
-    let dialog = this.matDialog.open(FormPlanillaComponent, {
-      width: '600px',
-      enterAnimationDuration: '500ms',
-      exitAnimationDuration: '1000ms',
-      data: {
-        id: id,
-        title: title,
-      }
-    });
-    dialog.afterClosed().subscribe({
-      next: (resp: any) => {
-        if (resp == 'edited') {
-          this.cargarPlanillas();
-          Swal.fire('Bien', `Beneficiario Editado Correctamente`, 'success')
-        }
-
-        if(resp == 'created'){
-          this.cargarPlanillas();
-          Swal.fire('Bien', `Planilla Creada Correctamente`, 'success')
-        }
-      },
-      error: (resp: any) => {
-        console.log(resp.error.message);
-
-      }
-    })
-  }
-
   cargarPlanillas() {
     this.planillaService.getAllPlanillas()
       .subscribe({
@@ -119,6 +120,7 @@ export class PlanillasComponent {
   }
 
 
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -126,5 +128,9 @@ export class PlanillasComponent {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  showList(id:string){
+    this.router.navigate(['dashboard/planillas/lista',  id ]);
   }
 }
