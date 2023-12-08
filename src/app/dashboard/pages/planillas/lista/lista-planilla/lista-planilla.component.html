@@ -18,9 +18,9 @@
       <mat-card-content>
       <div>
         <table mat-table matSort [dataSource]="dataSource">
-          <ng-container matColumnDef="_id">
+          <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
-            <td mat-cell *matCellDef="let row">{{ row._id }}</td>
+            <td mat-cell *matCellDef="let row">{{ row.id }}</td>
           </ng-container>
 
           <ng-container matColumnDef="ci">
@@ -28,9 +28,9 @@
             <td mat-cell *matCellDef="let row">{{ row.ci }}</td>
           </ng-container>
 
-          <ng-container matColumnDef="nombres">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombres</th>
-            <td mat-cell *matCellDef="let row">{{row.nombres}}</td>
+          <ng-container matColumnDef="beneficiario">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Beneficiario</th>
+            <td mat-cell *matCellDef="let row">{{row.beneficiario}}</td>
           </ng-container>
 
           <ng-container matColumnDef="estado">
@@ -47,9 +47,18 @@
           <ng-container matColumnDef="acciones">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
             <td mat-cell *matCellDef="let row">
-              <button (click)="addPago(row._id)" mat-icon-button matTooltip="Pagar" aria-label="Example icon-button with a heart icon">
-                <mat-icon>payments</mat-icon>
-              </button>
+              <ng-container *ngIf="row.estado != 'PAGADO'">
+                <button (click)="addPago(row.id)" mat-icon-button matTooltip="Pagar" aria-label="Example icon-button with a heart icon">
+                  <mat-icon>payments</mat-icon>
+                </button>
+              </ng-container>
+
+              <ng-container *ngIf="row.estado == 'PAGADO'">
+                <button (click)="imprimir(row.id)" mat-icon-button matTooltip="Imprimir" aria-label="Example icon-button with a heart icon">
+                  <mat-icon>print</mat-icon>
+                </button>
+              </ng-container>
+
               <!-- <button (click)="editBeneficiary(row._id)" mat-icon-button matTooltip="Editar" aria-label="Example icon-button with a heart icon">
                 <mat-icon>edit</mat-icon>
               </button>
@@ -57,6 +66,13 @@
                 <mat-icon>delete</mat-icon>
               </button> -->
             </td>
+
+            <!-- <div *ngIf="row.estado; else userloggedOut">
+              Hello User
+            </div>
+            <ng-template #userloggedOut>
+              Hello User, Login
+            </ng-template> -->
           </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="displayedColumn"></tr>
@@ -66,7 +82,7 @@
             <td class="mat-cell">"{{ termino.value }}" No existe</td>
           </tr>
         </table>
-        <mat-paginator [pageSizeOptions]="[5, 10 ,25 , 50]" aria-label="Select Page of Users"></mat-paginator>
+        <mat-paginator [pageSizeOptions]="[10 ,25 , 50]" aria-label="Select Page of Users"></mat-paginator>
       </div>
       </mat-card-content>
     </mat-card>

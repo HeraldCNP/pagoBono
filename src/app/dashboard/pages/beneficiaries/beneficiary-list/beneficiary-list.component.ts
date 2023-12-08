@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import { FormBeneficiaryComponent } from '../components/form-beneficiary/form-beneficiary.component';
 import { BeneficiariesService } from 'src/app/dashboard/services/beneficiaries.service';
 import { Beneficiary } from 'src/app/dashboard/interfaces/beneficiary';
+import { FormApoderadoComponent } from '../components/form-apoderado/form-apoderado.component';
 
 @Component({
   selector: 'app-beneficiary-list',
@@ -34,12 +35,16 @@ export class BeneficiaryListComponent {
     this.cargarBeneficiaries();
   }
 
+  createBeneficiary() {
+    this.openDialog(0, 'Crear Beneficiario')
+  }
+
   editBeneficiary(id: any) {
     this.openDialog(id, 'Editar Beneficiario')
   }
 
-  createBeneficiary() {
-    this.openDialog(0, 'Crear Beneficiario')
+  addApoderado(id:string){
+    this.openDialog2(id, 'Añadir Apoderado')
   }
 
   deleteBeneficiary(id: any) {
@@ -74,6 +79,36 @@ export class BeneficiaryListComponent {
 
   openDialog(id: any, title: any) {
     let dialog = this.matDialog.open(FormBeneficiaryComponent, {
+      width: '600px',
+      enterAnimationDuration: '500ms',
+      exitAnimationDuration: '1000ms',
+      data: {
+        id: id,
+        title: title,
+      }
+    });
+    dialog.afterClosed().subscribe({
+      next: (resp: any) => {
+        if (resp == 'edited') {
+          this.cargarBeneficiaries();
+          Swal.fire('Bien', `Beneficiario Editado Correctamente`, 'success')
+        }
+
+        if(resp == 'created'){
+          this.cargarBeneficiaries();
+          Swal.fire('Bien', `Beneficiario Creado Correctamente`, 'success')
+        }
+      },
+      error: (resp: any) => {
+        console.log(resp.error.message);
+        // Swal.fire('Error', resp, 'error')
+        // Swal.fire('Error', resp, 'error')
+      }
+    })
+  }
+
+  openDialog2(id: any, title: any) {
+    let dialog = this.matDialog.open(FormApoderadoComponent, {
       width: '600px',
       enterAnimationDuration: '500ms',
       exitAnimationDuration: '1000ms',

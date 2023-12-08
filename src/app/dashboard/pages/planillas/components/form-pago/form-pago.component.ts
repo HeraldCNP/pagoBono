@@ -38,7 +38,7 @@ export class FormPagoComponent {
       next: (resp: any) => {
         // this.closeDialog('created');
         console.log(resp);
-
+        this.closeDialog('created');
       },
       error: (resp: any) => {
         console.log(resp.error.message);
@@ -47,5 +47,10 @@ export class FormPagoComponent {
       }
     })
   }
+
+  closeDialog(data: any) {
+    this.ref.close(data);
+  }
+
 
 }

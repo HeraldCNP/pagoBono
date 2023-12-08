@@ -45,7 +45,7 @@ export class PlanillaService {
   }
 
   registerPago(form:any): Observable<any> {
-    const url = `${this.baseUrl}/pagos/addPago`;
+    const url = `${this.baseUrl}/persona/addPago`;
     const header = this.headers;
     // console.log(url);
     return this.http.post<any>(url, form, { headers: header });

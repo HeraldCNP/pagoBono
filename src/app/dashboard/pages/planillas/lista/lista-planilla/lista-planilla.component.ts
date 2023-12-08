@@ -8,6 +8,7 @@ import { Habilitado } from 'src/app/dashboard/interfaces/habilitado';
 import { PlanillaService } from 'src/app/dashboard/services/planilla.service';
 import Swal from 'sweetalert2';
 import { FormPagoComponent } from '../../components/form-pago/form-pago.component';
+import { PrintReciboComponent } from '../../components/print-recibo/print-recibo.component';
 
 @Component({
   selector: 'app-lista-planilla',
@@ -30,7 +31,7 @@ export class ListaPlanillaComponent {
 
 
 
-  displayedColumn: string[] = ['_id', 'ci', 'nombres', 'estado', 'habilitado', 'acciones'];
+  displayedColumn: string[] = ['id', 'ci', 'beneficiario', 'estado', 'habilitado', 'acciones'];
   dataSource!: MatTableDataSource<Habilitado>
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -44,8 +45,8 @@ export class ListaPlanillaComponent {
       .subscribe({
         next: (data: any) => {
           this.habilitados.set(data);
-          console.log(this.habilitados().idHabilitados);
-          this.dataSource = new MatTableDataSource(this.habilitados().idHabilitados);
+          console.log(this.habilitados().Habilitados);
+          this.dataSource = new MatTableDataSource(this.habilitados().Habilitados);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
         },
@@ -67,14 +68,14 @@ export class ListaPlanillaComponent {
   }
 
 
-  addPago(idPersona:any){
-    // console.log('idPersona', idPersona);
+  addPago(idPersona: any) {
+    console.log('idPersona', idPersona);
     // console.log('idPlanilla', this.idPlanilla);
     this.openDialog(idPersona, this.idPlanilla, 'Registrar Pago')
   }
 
 
-  openDialog(idPersona: any, idPlanilla:any, title: any) {
+  openDialog(idPersona: any, idPlanilla: any, title: any) {
     let dialog = this.matDialog.open(FormPagoComponent, {
       width: '600px',
       enterAnimationDuration: '500ms',
@@ -92,7 +93,44 @@ export class ListaPlanillaComponent {
           Swal.fire('Bien', `Beneficiario Editado Correctamente`, 'success')
         }
 
-        if(resp == 'created'){
+        if (resp == 'created') {
+          this.cargarHabilitados();
+          Swal.fire('Bien', `Pago realizado con exito`, 'success')
+        }
+      },
+      error: (resp: any) => {
+        console.log(resp.error.message);
+
+      }
+    })
+  }
+
+
+  imprimir(idPersona: any) {
+    console.log('idPersona', idPersona);
+    // console.log('idPlanilla', this.idPlanilla);
+    this.openDialogPrint(idPersona, this.idPlanilla, 'Imprimir')
+  }
+
+  openDialogPrint(idPersona: any, idPlanilla: any, title: any) {
+    let dialog = this.matDialog.open(PrintReciboComponent, {
+      width: '1000px',
+      enterAnimationDuration: '500ms',
+      exitAnimationDuration: '1000ms',
+      data: {
+        idPersona: idPersona,
+        idPlanilla: idPlanilla,
+        title: title,
+      }
+    });
+    dialog.afterClosed().subscribe({
+      next: (resp: any) => {
+        if (resp == 'edited') {
+          this.cargarHabilitados();
+          Swal.fire('Bien', `Beneficiario Editado Correctamente`, 'success')
+        }
+
+        if (resp == 'created') {
           this.cargarHabilitados();
           Swal.fire('Bien', `Planilla Creada Correctamente`, 'success')
         }
@@ -103,6 +141,8 @@ export class ListaPlanillaComponent {
       }
     })
   }
+
+
 
 
 
