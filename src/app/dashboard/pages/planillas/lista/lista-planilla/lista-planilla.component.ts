@@ -117,7 +117,7 @@ export class ListaPlanillaComponent {
 
   openDialogPrint(idPersona: any, idPlanilla: any, title: any) {
     let dialog = this.matDialog.open(PrintReciboComponent, {
-      width: '1000px',
+      width: '700px',
       enterAnimationDuration: '500ms',
       exitAnimationDuration: '1000ms',
       data: {

@@ -1,55 +1,29 @@
 <h2 mat-dialog-title>Install Angular</h2>
 <mat-dialog-content class="mat-typography">
   <div class="d-flex justify-content-between ml-2 mb-0">
-    <div class="p-2 ">
+    <div class="p-2">
       <img src="/assets/img/logoGamb.png" alt="" width="175px" />
     </div>
     <div class="text-center ml-5 mt-3 mb-0">
       <h3 class="off-m">DOCUMENTO DE INGRESO A ALMACÉN</h3>
       <p class="off-m">Expresado en Bolivianos</p>
     </div>
-    <div class="p-3 ">
+    <div class="p-3">
       <img src="/assets/img/sisal.png" alt="" width="163px" />
     </div>
   </div>
   <div *ngIf="beneficiary && beneficiaryPagado && planilla" class="cards">
-    <div class="">
-      <h5>DATOS GENERALES DE LA ENTIDAD</h5>
-      <table>
-        <thead>
-          <tr>
-            <th class="enti">Entidad:</th>
-            <th>Dep:</th>
-            <th>Mun:</th>
-            <th>D.A:</th>
-            <th>U.E:</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
     <div class="person">
-      <h5>DATOS PERSONALES DEL BENEFICIARIO DE BONO DE DISCAPACIDAD</h5>
+      <h5 class="text-center">DATOS PERSONALES DEL BENEFICIARIO DE BONO DE DISCAPACIDAD</h5>
       <table>
         <thead>
           <tr>
             <th>C.I:</th>
             <th>Nombre y Apellido:</th>
             <th>Sexo:</th>
-            <th>Tipo y Grado de discapacidad:</th>
             <th>Fecha de nacimiento:</th>
             <th>Edad:</th>
             <th>Direccion:</th>
-            <th>Fecha de vencimiento Carnet de Discapacidad:</th>
-            <th>Monto:</th>
           </tr>
         </thead>
         <tbody>
@@ -57,18 +31,34 @@
             <td>{{ beneficiary.ci }} - {{ beneficiary.expedido }}</td>
             <td>{{ beneficiary.nombres }}</td>
             <td>{{ beneficiary.sexo }}</td>
-            <td>{{ beneficiary.tipoDiscapacidad }} - {{ beneficiary.gradoDiscapacidad }}</td>
             <td>{{ beneficiary.fechaNacimiento | date: 'shortDate' }}</td>
             <td>45</td>
             <td>{{ beneficiary.direccion }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="mt-1">
+      <table>
+        <thead>
+          <tr>
+            <th>Tipo y Grado de discapacidad:</th>
+            <th>Fecha de vencimiento Carnet de Discapacidad:</th>
+            <th>Monto:</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ beneficiary.tipoDiscapacidad }} - {{ beneficiary.gradoDiscapacidad }}</td>
             <td>{{ beneficiary.carnetFechaVencimiento | date: 'shortDate' }}</td>
             <td>{{ beneficiaryPagado.monto }}</td>
           </tr>
         </tbody>
       </table>
     </div>
-    <div class="apo">
-      <h5>DATOS DEL APODERADO</h5>
+
+    <div class="person">
+      <h5 class="text-center">DATOS DEL APODERADO</h5>
       <table class="apo_ta">
         <thead>
           <tr>
