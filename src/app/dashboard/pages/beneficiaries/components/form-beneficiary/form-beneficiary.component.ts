@@ -1,4 +1,4 @@
-import { Component, Inject, inject } from '@angular/core';
+import { Component, Inject, inject, signal } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { BeneficiariesService } from 'src/app/dashboard/services/beneficiaries.service';
@@ -47,6 +47,7 @@ export class FormBeneficiaryComponent {
     if(this.inputData.id != 0){
       this.loadBeneficiaryForId(this.inputData.id);
     }
+    this.cargarTipos();
   }
 
   public beneficiaryForm: FormGroup = this.fb.group({
@@ -57,12 +58,31 @@ export class FormBeneficiaryComponent {
     sexo: [''],
     carnetFechaVencimiento: [''],
     tipoDiscapacidad: [''],
+    porcentajeDiscapacidad: [''],
     direccion: [''],
     celular: [''],
+    observacion: [''],
   })
 
   get form() {
     return this.beneficiaryForm.controls;
+  }
+
+  tipos = signal<any>(null);
+
+
+
+  cargarTipos() {
+    this.beneficiaryService.getAllTipos()
+      .subscribe({
+        next: (data: any) => {
+          this.tipos.set(data);
+          console.log(this.tipos());
+        },
+        error: (message: string | undefined) => {
+          Swal.fire('Error', message, 'error')
+        }
+      })
   }
 
 
@@ -77,8 +97,10 @@ export class FormBeneficiaryComponent {
         sexo: this.editData.sexo,
         carnetFechaVencimiento: this.editData.carnetFechaVencimiento,
         tipoDiscapacidad: this.editData.tipoDiscapacidad,
+        porcentajeDiscapacidad: this.editData.porcentajeDiscapacidad,
         direccion: this.editData.direccion,
         celular: this.editData.celular,
+        observacion: this.editData.observacion,
       });
     })
   }
@@ -109,9 +131,5 @@ export class FormBeneficiaryComponent {
       }
     })
   }
-
-
-
-
 
 }

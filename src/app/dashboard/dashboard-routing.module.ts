@@ -6,6 +6,7 @@ import { BeneficiaryListComponent } from './pages/beneficiaries/beneficiary-list
 import { FileUploadComponent } from './pages/file-upload/file-upload.component';
 import { PlanillasComponent } from './pages/planillas/planillas.component';
 import { ListaPlanillaComponent } from './pages/planillas/lista/lista-planilla/lista-planilla.component';
+import { TiposDiscapacidadComponent } from './pages/tiposDiscapacidad/tipos-discapacidad/tipos-discapacidad.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,7 @@ const routes: Routes = [
       { path: 'db', component: FileUploadComponent },
       { path: 'planillas', component: PlanillasComponent },
       { path: 'planillas/lista/:id', component: ListaPlanillaComponent },
+      { path: 'tiposDiscapacidad', component: TiposDiscapacidadComponent },
     ]
   }
 ];

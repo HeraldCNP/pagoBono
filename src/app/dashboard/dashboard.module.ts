@@ -16,6 +16,8 @@ import { ListaPlanillaComponent } from './pages/planillas/lista/lista-planilla/l
 import { FormPagoComponent } from './pages/planillas/components/form-pago/form-pago.component';
 import { FormApoderadoComponent } from './pages/beneficiaries/components/form-apoderado/form-apoderado.component';
 import { PrintReciboComponent } from './pages/planillas/components/print-recibo/print-recibo.component';
+import { TiposDiscapacidadComponent } from './pages/tiposDiscapacidad/tipos-discapacidad/tipos-discapacidad.component';
+import { FormTipoComponent } from './pages/tiposDiscapacidad/tipos-discapacidad/components/form-tipo/form-tipo.component';
 
 
 @NgModule({
@@ -31,7 +33,9 @@ import { PrintReciboComponent } from './pages/planillas/components/print-recibo/
     ListaPlanillaComponent,
     FormPagoComponent,
     FormApoderadoComponent,
-    PrintReciboComponent
+    PrintReciboComponent,
+    TiposDiscapacidadComponent,
+    FormTipoComponent
   ],
   imports: [
     CommonModule,

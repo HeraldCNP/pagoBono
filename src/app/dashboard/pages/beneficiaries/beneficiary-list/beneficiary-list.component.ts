@@ -23,7 +23,7 @@ export class BeneficiaryListComponent {
   private beneficiaryService = inject(BeneficiariesService)
 
 
-  displayedColumn: string[] = ['_id', 'nombres', 'ci', 'sexo', 'fechaNacimiento', 'carnetFechaVencimiento', 'celular', 'direccion', 'tipoDiscapacidad', 'habilitado', 'acciones'];
+  displayedColumn: string[] = ['nombres', 'ci', 'sexo', 'fechaNacimiento', 'carnetFechaVencimiento', 'celular', 'direccion', 'tipoDiscapacidad', 'estado', 'observacion', 'acciones'];
   dataSource!: MatTableDataSource<Beneficiary>
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -142,7 +142,7 @@ export class BeneficiaryListComponent {
       .subscribe({
         next: (data: any) => {
           this.beneficiaries.set(data);
-          // console.log(this.beneficiaries());
+          console.log(this.beneficiaries());
           this.dataSource = new MatTableDataSource(this.beneficiaries());
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;

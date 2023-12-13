@@ -23,7 +23,7 @@ export class PlanillasComponent {
   private planillaService = inject(PlanillaService);
   private router = inject(Router);
 
-  displayedColumn: string[] = ['_id', 'gestion', 'mes', 'acciones'];
+  displayedColumn: string[] = ['gestion', 'mes', 'acciones'];
   dataSource!: MatTableDataSource<Planilla>
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -63,6 +63,10 @@ export class PlanillasComponent {
         if(resp == 'created'){
           this.cargarPlanillas();
           Swal.fire('Bien', `Planilla Creada Correctamente`, 'success')
+        }
+
+        if(resp == 'error'){
+          this.cargarPlanillas();
         }
       },
       error: (resp: any) => {

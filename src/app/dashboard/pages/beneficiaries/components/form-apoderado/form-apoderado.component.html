@@ -86,8 +86,7 @@
   {{apoderadoForm.value | json}}
   <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close>Cancel</button>
-    <button (click)="(saveBeneficiary())" *ngIf="inputData.id == 0" mat-raised-button color="primary" [disabled]="apoderadoForm.invalid"
+    <button (click)="(saveApoderado())" mat-raised-button color="primary" [disabled]="apoderadoForm.invalid"
       ><mat-icon>save</mat-icon>Registrar</button>
-
   </mat-dialog-actions>
 </form>

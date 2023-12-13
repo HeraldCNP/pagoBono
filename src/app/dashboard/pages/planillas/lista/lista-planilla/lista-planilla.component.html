@@ -1,9 +1,9 @@
 <div class="row p-2">
   <div class="col-md-12">
     <mat-card>
-      <mat-card-header>
-        <mat-card-title>Lista</mat-card-title>
-        <mat-card-subtitle>End</mat-card-subtitle>
+      <mat-card-header *ngIf="planilla">
+        <mat-card-title>Lista de Habilitados Mes de {{ planilla.mes }} Gestión {{ planilla.gestion }}</mat-card-title>
+        <!-- <mat-card-subtitle>End</mat-card-subtitle> -->
         <span class="spacer"></span>
 
 
@@ -11,26 +11,21 @@
       <mat-divider></mat-divider>
 
       <mat-form-field>
-        <mat-label>Tabla</mat-label>
+        <mat-label>Buscar...</mat-label>
         <input matInput placeholder="Buscar" search (keyup)="applyFilter($event)" #termino>
       </mat-form-field>
       <mat-divider></mat-divider>
       <mat-card-content>
       <div>
         <table mat-table matSort [dataSource]="dataSource">
-          <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
-            <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+          <ng-container matColumnDef="beneficiario">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Beneficiario</th>
+            <td mat-cell *matCellDef="let row">{{row.beneficiario}}</td>
           </ng-container>
 
           <ng-container matColumnDef="ci">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>CI</th>
             <td mat-cell *matCellDef="let row">{{ row.ci }}</td>
-          </ng-container>
-
-          <ng-container matColumnDef="beneficiario">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Beneficiario</th>
-            <td mat-cell *matCellDef="let row">{{row.beneficiario}}</td>
           </ng-container>
 
           <ng-container matColumnDef="estado">

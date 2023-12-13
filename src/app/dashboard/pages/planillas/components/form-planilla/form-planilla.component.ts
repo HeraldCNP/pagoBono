@@ -3,6 +3,7 @@ import { Component, Inject, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { PlanillaService } from 'src/app/dashboard/services/planilla.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-form-planilla',
@@ -83,6 +84,7 @@ export class FormPlanillaComponent {
         (event: any) => {
           if (event.type === HttpEventType.UploadProgress) {
             this.progress = Math.round(100 * event.loaded / event.total);
+
           } else if (event instanceof HttpResponse) {
             this.message = event.body.message;
             console.log(event);
@@ -92,7 +94,10 @@ export class FormPlanillaComponent {
         },
         (err: any) => {
           console.log(err);
+          this.closeDialog('error');
           this.progress = 0;
+
+          Swal.fire('Alerta', err.error.message, 'error')
 
           if (err.error && err.error.message) {
             this.message = err.error.message;

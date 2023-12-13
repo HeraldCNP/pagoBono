@@ -24,7 +24,7 @@
         <mat-form-field class="inline">
           <mat-label>Carnet de Itendidad</mat-label>
           <input type="text" matInput placeholder="Ej. 52485748" formControlName="ci">
-          <mat-icon matSuffix>person</mat-icon>
+          <mat-icon matSuffix>badge</mat-icon>
 
           <mat-error *ngIf="form['ci'].hasError('required') && form['ci'].touched">
             El Carnet de Itendidad es obligatorio.
@@ -41,6 +41,7 @@
               {{departamento.label}}
             </mat-option>
           </mat-select>
+          <mat-icon matSuffix>badge</mat-icon>
         </mat-form-field>
 
         <mat-form-field class="inline">
@@ -53,12 +54,13 @@
 
 
         <mat-form-field class="inline right">
-          <mat-label>Sexo</mat-label>
+          <mat-label>Género</mat-label>
           <mat-select formControlName="sexo">
             <mat-option *ngFor="let sexo of sexos" [value]="sexo.value">
               {{sexo.label}}
             </mat-option>
           </mat-select>
+          <mat-icon matSuffix>wc</mat-icon>
         </mat-form-field>
 
         <mat-form-field class="inline">
@@ -72,23 +74,37 @@
         <mat-form-field class="inline right">
           <mat-label>Tipo de Discapacidad</mat-label>
           <mat-select formControlName="tipoDiscapacidad">
-            <mat-option *ngFor="let discapacidad of discapacidades" [value]="discapacidad.value">
-              {{discapacidad.label}}
+            <mat-option *ngFor="let discapacidad of tipos()" [value]="discapacidad.tipo">
+              {{discapacidad.tipo}}
             </mat-option>
           </mat-select>
+          <mat-icon matSuffix>accessible_forward</mat-icon>
         </mat-form-field>
 
         <mat-form-field class="inline">
-          <mat-label>Direccion</mat-label>
-          <input type="text" matInput placeholder="" formControlName="direccion">
-          <mat-icon matSuffix>mode_edit</mat-icon>
+          <mat-label>% de Discapacidad</mat-label>
+          <input type="number" matInput placeholder="" formControlName="porcentajeDiscapacidad">
+          <mat-icon matSuffix>percent</mat-icon>
         </mat-form-field>
 
         <mat-form-field class="inline right">
+          <mat-label>Direccion</mat-label>
+          <input type="text" matInput placeholder="" formControlName="direccion">
+          <mat-icon matSuffix>home</mat-icon>
+        </mat-form-field>
+
+
+
+        <mat-form-field class="inline">
           <mat-label>Celular</mat-label>
           <span matPrefix>+591 &nbsp;</span>
           <input type="number" matInput placeholder="72584525" formControlName="celular">
-          <mat-icon matSuffix>mode_edit</mat-icon>
+          <mat-icon matSuffix>call</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field class="inline right">
+          <mat-label>Observación</mat-label>
+          <textarea matInput formControlName="observacion"></textarea>
         </mat-form-field>
 
 

@@ -55,15 +55,16 @@ export class PlanillaService {
 
   upload(file: File, form:FormGroup): Observable<HttpEvent<any>> {
     const formData: FormData = new FormData();
+    const header = this.headers;
     this.formData =
     formData.append('gestion', form.value.gestion);
     formData.append('mes', form.value.mes);
     formData.append('file', file);
 
 
-    const req = new HttpRequest('POST', `${this.baseUrl}/persona/actPersona`, formData, {
+    const req = new HttpRequest('POST', `${this.baseUrl}/persona/actPersona`, formData,  {
       reportProgress: true,
-      responseType: 'json'
+      responseType: 'json',
     });
     return this.http.request(req);
   }

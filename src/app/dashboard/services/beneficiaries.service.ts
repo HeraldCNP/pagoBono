@@ -20,42 +20,37 @@ export class BeneficiariesService {
 
 
 
-
-  getAllUsers(): Observable<any> {
-    const url = `${this.baseUrl}/persona`;
+  get token(){
     const token = localStorage.getItem('token');
     if (!token) {
       this.authService.logout();
     }
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    // console.log(url);
+    return token;
+  }
 
-    return this.http.get<any>(url, { headers });
+  get headers(){
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
+    return headers;
+  }
+
+
+  getAllUsers(): Observable<any> {
+    const url = `${this.baseUrl}/persona`;
+    const header = this.headers;
+    return this.http.get<any>(url, { headers: header });
   }
 
   createBeneficiary(data: any): Observable<any> {
     const url = `${this.baseUrl}/persona`;
-    const token = localStorage.getItem('token');
-    if (!token) {
-      this.authService.logout();
-    }
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    // console.log(url);
-
-    return this.http.post<any>(url, data);
+    const header = this.headers;
+    return this.http.post<any>(url, data, { headers: header });
     // return this.http.post<any>(url, data, { headers });
   }
 
   getBeneficiaryById(id:any){
     const url = `${this.baseUrl}/persona/${id}`;
-    const token = localStorage.getItem('token');
-    if (!token) {
-      this.authService.logout();
-    }
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    // console.log(url);
-
-    return this.http.get<any>(url);
+    const header = this.headers;
+    return this.http.get<any>(url, {headers: header});
     // return this.http.get<any>(url+id, { headers });
   }
 
@@ -66,27 +61,63 @@ export class BeneficiariesService {
 
   editBeneficiary(data: any, id: any): Observable<any> {
     const url = `${this.baseUrl}/persona/${id}`;
-    const token = localStorage.getItem('token');
-    if (!token) {
-      this.authService.logout();
-    }
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    // console.log(url);
-
-    return this.http.patch<any>(url, data);
-    // return this.http.post<any>(url, data, { headers });
+    const header = this.headers;
+    return this.http.patch<any>(url, data, {headers: header});
   }
 
   deleteBeneficiary(id: any): Observable<any> {
     const url = `${this.baseUrl}/persona/${id}`;
-    const token = localStorage.getItem('token');
-    if (!token) {
-      this.authService.logout();
-    }
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    // console.log(url);
-
-    return this.http.delete<any>(url);
+    const header = this.headers;
+    return this.http.delete<any>(url, {headers: header});
     // return this.http.post<any>(url, { headers });
   }
+
+  createApoderado(data: any): Observable<any> {
+    const url = `${this.baseUrl}/apoderados`;
+    const header = this.headers;
+    return this.http.post<any>(url, data, { headers: header });
+    // return this.http.post<any>(url, data, { headers });
+  }
+
+  /* Servicios Tipos de Discapacidad */
+
+  getAllTipos(): Observable<any> {
+    const url = `${this.baseUrl}/tipo`;
+    const header = this.headers;
+    return this.http.get<any>(url, { headers: header });
+  }
+
+  createTipo(data: any): Observable<any> {
+    const url = `${this.baseUrl}/tipo`;
+    const header = this.headers;
+    return this.http.post<any>(url, data, { headers: header });
+  }
+
+  getTipoById(id:any){
+    const url = `${this.baseUrl}/tipo/${id}`;
+    const header = this.headers;
+    return this.http.get<any>(url, { headers: header });
+    // return this.http.get<any>(url+id, { headers });
+  }
+
+  // editBeneficiary(form: any, id: any): Observable<any> {
+  //   let dir = `${this.URL}/proveedor/${id}`;
+  //   return this.http.put<any>(dir, form)
+  // }
+
+  editTipo(data: any, id: any): Observable<any> {
+    const url = `${this.baseUrl}/tipo/${id}`;
+    const header = this.headers;
+    return this.http.patch<any>(url, data, { headers: header });
+    // return this.http.post<any>(url, data, { headers });
+  }
+
+  deleteTipo(id: any): Observable<any> {
+    const url = `${this.baseUrl}/tipo/${id}`;
+    const header = this.headers;
+    return this.http.delete<any>(url, { headers: header });
+  }
+
+
+  /* END Servicios Tipos de Discapacidad */
 }

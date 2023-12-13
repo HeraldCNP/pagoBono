@@ -1,0 +1,44 @@
+
+.cards{
+  width: auto;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-direction: column;
+}
+table,  td, th{
+  border: 1px solid black;
+  padding: 5px;
+  text-align: center;
+}
+th{
+  color: black;
+  background: #D3CCE3;
+  background: -webkit-linear-gradient(to right, #E9E4F0, #D3CCE3);
+  background: linear-gradient(to right, #E9E4F0, #D3CCE3);
+  font-size: 0.7rem;
+}
+
+td{
+  font-size: 0.7rem;
+}
+.gene{
+  width: 55.5%;
+}
+.person, .tip, .dir, .apo{
+  margin-top: 10px;
+  width: auto;
+}
+.tip_ta, .dir_ta, .apo_ta{
+  width: 100%;
+}
+.Nom{
+  width: 100%;
+}
+.ci{
+  width: 5px;
+}
+.enti{
+  width: 633px;
+}

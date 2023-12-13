@@ -46,15 +46,15 @@ export class FormApoderadoComponent {
     parentesco: [''],
     direccion: [''],
     celular: [''],
-    idBeneficiario: [this.data.id],
+    idPersona: [this.data.id],
   })
 
   get form() {
     return this.apoderadoForm.controls;
   }
 
-  saveBeneficiary() {
-    this.beneficiaryService.createBeneficiary(this.apoderadoForm.value).subscribe({
+  saveApoderado() {
+    this.beneficiaryService.createApoderado(this.apoderadoForm.value).subscribe({
       next: (resp: any) => {
         this.closeDialog('created');
       },

@@ -24,6 +24,7 @@ export class ListaPlanillaComponent {
   private route = inject(ActivatedRoute);
 
   idPlanilla: any;
+  planilla: any;
 
   ngOnInit(): void {
     this.cargarHabilitados();
@@ -31,7 +32,7 @@ export class ListaPlanillaComponent {
 
 
 
-  displayedColumn: string[] = ['id', 'ci', 'beneficiario', 'estado', 'habilitado', 'acciones'];
+  displayedColumn: string[] = ['beneficiario', 'ci', 'estado', 'acciones'];
   dataSource!: MatTableDataSource<Habilitado>
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -45,7 +46,9 @@ export class ListaPlanillaComponent {
       .subscribe({
         next: (data: any) => {
           this.habilitados.set(data);
-          console.log(this.habilitados().Habilitados);
+          this.planilla = data;
+          // console.log(this.habilitados().Habilitados);
+          console.log(this.planilla);
           this.dataSource = new MatTableDataSource(this.habilitados().Habilitados);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
