@@ -1,16 +1,17 @@
-<mat-dialog-content class="mat-typography" id="content" #content>
-  <div class="d-flex justify-content-between ml-2 mb-0">
-    <div class="p-2">
+<mat-dialog-content class="mat-typography" *ngIf="beneficiary && beneficiaryPagado && planilla">
+  <div class="d-flex justify-content-between mb-0">
+    <div class="">
       <img src="/assets/img/logoGamb.png" alt="" width="110px" />
     </div>
-    <div class="text-center mt-2 mb-0">
+    <div class="text-center mb-0">
       <p class="off-m">Boleta de Pago Bono Discapacidad</p>
+      <p class="off-m">Gestión: {{ planilla().gestion }} - Mes: {{ planilla().mes }}</p>
     </div>
     <div class="p-3">
       <img src="/assets/img/sisal.png" alt="" width="163px" />
     </div>
   </div>
-  <div *ngIf="beneficiary && beneficiaryPagado && planilla" class="cards">
+  <div  class="cards">
     <div class="person">
       <h5 class="text-center">DATOS PERSONALES DEL BENEFICIARIO DE BONO DE DISCAPACIDAD</h5>
       <table>
@@ -55,7 +56,7 @@
       </table>
     </div>
 
-    <div class="person mt-3">
+    <div class="person mt-2">
       <h5 class="text-center">DATOS DEL APODERADO</h5>
       <table class="apo_ta">
         <thead>
@@ -75,20 +76,35 @@
       </table>
     </div>
   </div>
+  <div class="d-flex justify-content-between mb-0 espacio">
+    <div>
+      <p class="firma">Funcionario</p>
+    </div>
+    <div class="text-center mb-0">
+      <p class="firma">Beneficiario</p>
+    </div>
+    <div>
+      <p class="firma">Apoderado</p>
+    </div>
+  </div>
 </mat-dialog-content>
-<mat-dialog-content class="mat-typography" id="content" #content>
-  <div class="d-flex justify-content-between ml-2 mb-0">
-    <div class="p-2">
+
+<hr>
+
+<mat-dialog-content class="mat-typography" *ngIf="beneficiary && beneficiaryPagado && planilla">
+  <div class="d-flex justify-content-between mb-0">
+    <div class="">
       <img src="/assets/img/logoGamb.png" alt="" width="110px" />
     </div>
-    <div class="text-center mt-2 mb-0">
+    <div class="text-center mb-0">
       <p class="off-m">Boleta de Pago Bono Discapacidad</p>
+      <p class="off-m">Gestión: {{ planilla().gestion }} - Mes: {{ planilla().mes }}</p>
     </div>
     <div class="p-3">
       <img src="/assets/img/sisal.png" alt="" width="163px" />
     </div>
   </div>
-  <div *ngIf="beneficiary && beneficiaryPagado && planilla" class="cards">
+  <div  class="cards">
     <div class="person">
       <h5 class="text-center">DATOS PERSONALES DEL BENEFICIARIO DE BONO DE DISCAPACIDAD</h5>
       <table>
@@ -133,7 +149,7 @@
       </table>
     </div>
 
-    <div class="person mt-3">
+    <div class="person mt-2">
       <h5 class="text-center">DATOS DEL APODERADO</h5>
       <table class="apo_ta">
         <thead>
@@ -153,8 +169,25 @@
       </table>
     </div>
   </div>
+  <div class="d-flex justify-content-between mb-0 espacio">
+    <div>
+      <p class="firma">Funcionario</p>
+    </div>
+    <div class="text-center mb-0">
+      <p class="firma">Beneficiario</p>
+    </div>
+    <div>
+      <p class="firma">Apoderado</p>
+    </div>
+  </div>
 </mat-dialog-content>
-<mat-dialog-actions align="end" id="parte1">
-  <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button cdkFocusInitial (click)="printMe()">Imprimir</button>
-</mat-dialog-actions>
+
+
+
+<div>
+  <mat-dialog-actions align="end" id="parte1">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button cdkFocusInitial (click)="printMe()">Imprimir</button>
+  </mat-dialog-actions>
+</div>
+

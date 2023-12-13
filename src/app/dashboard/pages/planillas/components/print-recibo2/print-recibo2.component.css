@@ -26,6 +26,13 @@ td {
   border: 1px solid #999;
 }
 
+.espacio{
+  margin-top: 90px;
+}
+
+.firma{
+  font-size: 0.8rem;
+}
 
 @media print {
 #parte1 {display:none;}

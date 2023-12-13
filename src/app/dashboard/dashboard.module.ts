@@ -18,6 +18,7 @@ import { FormApoderadoComponent } from './pages/beneficiaries/components/form-ap
 import { PrintReciboComponent } from './pages/planillas/components/print-recibo/print-recibo.component';
 import { TiposDiscapacidadComponent } from './pages/tiposDiscapacidad/tipos-discapacidad/tipos-discapacidad.component';
 import { FormTipoComponent } from './pages/tiposDiscapacidad/tipos-discapacidad/components/form-tipo/form-tipo.component';
+import { PrintRecibo2Component } from './pages/planillas/components/print-recibo2/print-recibo2.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { FormTipoComponent } from './pages/tiposDiscapacidad/tipos-discapacidad/
     FormApoderadoComponent,
     PrintReciboComponent,
     TiposDiscapacidadComponent,
-    FormTipoComponent
+    FormTipoComponent,
+    PrintRecibo2Component
   ],
   imports: [
     CommonModule,

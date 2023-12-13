@@ -7,6 +7,7 @@ import { FileUploadComponent } from './pages/file-upload/file-upload.component';
 import { PlanillasComponent } from './pages/planillas/planillas.component';
 import { ListaPlanillaComponent } from './pages/planillas/lista/lista-planilla/lista-planilla.component';
 import { TiposDiscapacidadComponent } from './pages/tiposDiscapacidad/tipos-discapacidad/tipos-discapacidad.component';
+import { PrintRecibo2Component } from './pages/planillas/components/print-recibo2/print-recibo2.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,7 @@ const routes: Routes = [
       { path: 'db', component: FileUploadComponent },
       { path: 'planillas', component: PlanillasComponent },
       { path: 'planillas/lista/:id', component: ListaPlanillaComponent },
+      { path: 'planillas/imprimir/:idPlanilla/:idBeneficiary', component: PrintRecibo2Component },
       { path: 'tiposDiscapacidad', component: TiposDiscapacidadComponent },
     ]
   }

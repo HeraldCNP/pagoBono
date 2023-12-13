@@ -28,8 +28,15 @@ export class FormBeneficiaryComponent {
   ];
 
   departamentos: any[] = [
-    { value: 'PT', label: 'Potosí' },
+    { value: 'BE', label: 'Beni' },
     { value: 'CH', label: 'Chuquisaca' },
+    { value: 'Co', label: 'Cochabamba' },
+    { value: 'LP', label: 'La Paz' },
+    { value: 'OR', label: 'Oruro' },
+    { value: 'PA', label: 'Pando' },
+    { value: 'PT', label: 'Potosí' },
+    { value: 'SC', label: 'Santa Cruz' },
+    { value: 'TJ', label: 'Tarija' },
   ];
 
   editData: any;

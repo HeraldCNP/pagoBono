@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Habilitado } from 'src/app/dashboard/interfaces/habilitado';
 import { PlanillaService } from 'src/app/dashboard/services/planilla.service';
 import Swal from 'sweetalert2';
@@ -22,6 +22,7 @@ export class ListaPlanillaComponent {
 
   private planillaService = inject(PlanillaService);
   private route = inject(ActivatedRoute);
+  private router = inject(Router);
 
   idPlanilla: any;
   planilla: any;
@@ -117,7 +118,7 @@ export class ListaPlanillaComponent {
 
   openDialogPrint(idPersona: any, idPlanilla: any, title: any) {
     let dialog = this.matDialog.open(PrintReciboComponent, {
-      width: '700px',
+      width: '1200px',
       enterAnimationDuration: '500ms',
       exitAnimationDuration: '1000ms',
       data: {
@@ -143,6 +144,13 @@ export class ListaPlanillaComponent {
 
       }
     })
+  }
+
+
+  imprimir2(idPersona: any) {
+    console.log('idPersona', idPersona);
+    // console.log('idPlanilla', this.idPlanilla);
+    this.router.navigate(['dashboard/planillas/imprimir', this.idPlanilla, idPersona]);
   }
 
 
