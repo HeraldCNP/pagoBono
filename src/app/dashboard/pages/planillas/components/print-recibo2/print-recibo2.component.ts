@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BeneficiariesService } from 'src/app/dashboard/services/beneficiaries.service';
 import { PlanillaService } from 'src/app/dashboard/services/planilla.service';
 
@@ -10,6 +10,7 @@ import { PlanillaService } from 'src/app/dashboard/services/planilla.service';
 })
 export class PrintRecibo2Component {
   private route = inject(ActivatedRoute);
+  private router = inject(Router);
   private planillaService = inject(PlanillaService);
   private beneficiaryService = inject(BeneficiariesService);
 
@@ -71,4 +72,10 @@ export class PrintRecibo2Component {
   public printMe(): void {
     window.print();
   }
+
+  cancelar() {
+    console.log('idPersona', this.idPlanilla);
+    this.router.navigate(['dashboard/planillas/lista',  this.idPlanilla ]);
+  }
+
 }

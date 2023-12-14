@@ -13,7 +13,7 @@ export class AuthService {
   private http = inject(HttpClient);
 
   private _currentUser = signal<User | null>(null);
-  private _authStatus = signal<AuthStatus>(AuthStatus.checking);
+  private _authStatus = signal<AuthStatus | null>(AuthStatus.autheticated);
 
 
   //al mundo exterior

@@ -186,8 +186,10 @@
 
 <div>
   <mat-dialog-actions align="end" id="parte1">
-    <button mat-button mat-dialog-close>Cancel</button>
-    <button mat-button cdkFocusInitial (click)="printMe()">Imprimir</button>
+    <div class="d-flex justify-content-around mb-0">
+      <button mat-stroked-button (click)="cancelar()">Cancelar</button>
+      <button mat-raised-button cdkFocusInitial (click)="printMe()">Imprimir</button>
+    </div>
   </mat-dialog-actions>
 </div>
 
