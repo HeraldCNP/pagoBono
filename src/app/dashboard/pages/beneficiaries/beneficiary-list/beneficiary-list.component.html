@@ -69,8 +69,8 @@
             <ng-container matColumnDef="estado">
               <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
               <td mat-cell *matCellDef="let row">
-                <span *ngIf="row.estado === true">Habilitado</span>
-                <span *ngIf="row.estado === false">Inhabilitado</span>
+                <span *ngIf="row.estado === true"><span class="badge bg-success">Habilitado</span></span>
+                <span *ngIf="row.estado === false"><span class="badge bg-danger">Inhabilitado</span></span>
               </td>
             </ng-container>
 
