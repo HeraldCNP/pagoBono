@@ -19,6 +19,8 @@ import { PrintReciboComponent } from './pages/planillas/components/print-recibo/
 import { TiposDiscapacidadComponent } from './pages/tiposDiscapacidad/tipos-discapacidad/tipos-discapacidad.component';
 import { FormTipoComponent } from './pages/tiposDiscapacidad/tipos-discapacidad/components/form-tipo/form-tipo.component';
 import { PrintRecibo2Component } from './pages/planillas/components/print-recibo2/print-recibo2.component';
+import { NgxPrintModule } from 'ngx-print';
+
 
 
 @NgModule({
@@ -43,7 +45,8 @@ import { PrintRecibo2Component } from './pages/planillas/components/print-recibo
     CommonModule,
     DashboardRoutingModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPrintModule
   ]
 })
 export class DashboardModule { }

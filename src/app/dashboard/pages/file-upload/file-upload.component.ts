@@ -2,6 +2,8 @@ import { Component, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FileUploadService } from '../../services/file-upload.service';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-file-upload',
@@ -13,9 +15,11 @@ export class FileUploadComponent {
   progress = 0;
   message = '';
 
-  fileName = 'Seleccione un Archivo en formato JSON';
+  fileName = 'Seleccione un archivo con la extención .xls';
   fileInfos?: Observable<any>;
   private uploadService = inject(FileUploadService)
+  private snackBar = inject(MatSnackBar)
+  private router = inject(Router)
 
   constructor() { }
 
@@ -29,7 +33,7 @@ export class FileUploadComponent {
       this.currentFile = file;
       this.fileName = this.currentFile.name;
     } else {
-      this.fileName = 'Seleccione un archivo en Formato JSON';
+      this.fileName = 'Seleccione un archivo con la extención .xls';
     }
   }
 
@@ -37,16 +41,21 @@ export class FileUploadComponent {
     this.progress = 0;
     this.message = "";
 
-
-
     if (this.currentFile) {
       this.uploadService.upload(this.currentFile).subscribe(
         (event: any) => {
           if (event.type === HttpEventType.UploadProgress) {
             this.progress = Math.round(100 * event.loaded / event.total);
-          } else if (event instanceof HttpResponse) {
-            this.message = event.body.message;
             console.log(event);
+          } else if (event instanceof HttpResponse) {
+            console.log(event);
+
+            this.snackBar.open('Registro Exitoso', 'Cerrar', {
+              duration: 3000
+            });
+
+            this.router.navigate(['dashboard/beneficiaries']);
+
 
             // this.fileInfos = this.uploadService.getFiles();
           }

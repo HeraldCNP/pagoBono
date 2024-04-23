@@ -5,8 +5,8 @@
         <mat-card-title>Lista de Planillas</mat-card-title>
         <!-- <mat-card-subtitle>End</mat-card-subtitle> -->
         <span class="spacer"></span>
-        <mat-dialog-actions >
-          <button mat-mini-fab matTooltip="Crear Nuevo" color="primary" aria-label="Example mini fab with a heart icon" (click)="createBeneficiary()">
+        <mat-dialog-actions *ngIf="user().roles === 'admin' || user().roles === 'presupuestos'">
+          <button mat-mini-fab matTooltip="Crear Nuevo" color="primary" aria-label="Example mini fab with a heart icon" (click)="createNewPlanilla()">
             <mat-icon>add</mat-icon>
           </button>
         </mat-dialog-actions>

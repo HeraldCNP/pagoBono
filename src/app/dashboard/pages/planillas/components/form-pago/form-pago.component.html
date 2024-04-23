@@ -16,12 +16,19 @@
           <mat-hint>DD/MM/YYYY</mat-hint>
           <mat-datepicker-toggle matIconSuffix [for]="fecha"></mat-datepicker-toggle>
           <mat-datepicker #fecha></mat-datepicker>
+          <mat-error *ngIf="form['fecha'].hasError('required') && form['fecha'].touched">
+            La Fecha es Obligatoria
+          </mat-error>
         </mat-form-field>
 
 
         <mat-form-field class="full-width">
           <mat-label>Monto</mat-label>
           <input type="number" matInput placeholder="Monto" formControlName="monto">
+          <mat-icon matSuffix>paid</mat-icon>
+          <mat-error *ngIf="form['monto'].hasError('required') && form['monto'].touched">
+            El Monto es Obligatorio
+          </mat-error>
         </mat-form-field>
 
 
@@ -46,9 +53,9 @@
     </mat-card>
 
   </mat-dialog-content>
-  {{pagoForm.value | json}}
+  <!-- {{pagoForm.value | json}} -->
   <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button mat-dialog-close>Cancelar</button>
     <button (click)="(registerPago())" mat-raised-button color="primary"
       [disabled]="pagoForm.invalid"><mat-icon>save</mat-icon>Pagar</button>
   </mat-dialog-actions>

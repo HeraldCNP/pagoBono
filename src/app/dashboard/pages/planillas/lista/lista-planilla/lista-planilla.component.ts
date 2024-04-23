@@ -94,7 +94,7 @@ export class ListaPlanillaComponent {
       next: (resp: any) => {
         if (resp == 'edited') {
           this.cargarHabilitados();
-          Swal.fire('Bien', `Beneficiario Editado Correctamente`, 'success')
+          Swal.fire('Bien', `Pago Editado Correctamente`, 'success')
         }
 
         if (resp == 'created') {

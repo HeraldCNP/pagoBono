@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { BeneficiariesService } from 'src/app/dashboard/services/beneficiaries.service';
 import { PlanillaService } from 'src/app/dashboard/services/planilla.service';
 
+
 @Component({
   selector: 'app-print-recibo',
   templateUrl: './print-recibo.component.html',
@@ -18,10 +19,10 @@ export class PrintReciboComponent {
 
   }
   inputData: any;
-  beneficiary: any;
-  beneficiaryPagado: any;
   habilitados = signal<any>(null);
   planilla = signal<any>(null);
+  beneficiaryPagado = signal<any>(null);
+  beneficiary = signal<any>(null);
 
   ngOnInit(): void {
     this.inputData = this.data;
@@ -35,8 +36,8 @@ export class PrintReciboComponent {
 
   getBeneficiary(){
     this.beneficiaryService.getBeneficiaryById(this.inputData.idPersona).subscribe(item => {
-      this.beneficiary = item;
-      console.log('Beneficiario', this.beneficiary);
+      this.beneficiary.set(item);
+      console.log('Beneficiario', this.beneficiary());
     })
   }
 
@@ -48,9 +49,9 @@ export class PrintReciboComponent {
         this.planilla.set(data);
         console.log('planilla', this.planilla());
 
-        console.log(this.habilitados().Habilitados);
-        this.beneficiaryPagado = this.sacarBeneficiario(this.inputData.idPersona);
-        console.log('Beneficiario Pagado', this.beneficiaryPagado);
+        // console.log(this.habilitados().Habilitados);
+        this.beneficiaryPagado.set(this.sacarBeneficiario(this.inputData.idPersona));
+        console.log('Beneficiario Pagado', this.beneficiaryPagado());
 
       }
     })
@@ -70,9 +71,24 @@ export class PrintReciboComponent {
     return encontrado;
   }
 
-  public printMe(): void {
-    window.print();
-  }
+  // public printMe(): void {
+  //   window.print();
+  // }
 
+
+  calcularEdad(fecha: Date): number {
+    const hoy = new Date();
+    let fechaNacimiento: Date = new Date(fecha);
+
+
+    let edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+    const meses = hoy.getMonth() - fechaNacimiento.getMonth();
+
+    if (meses < 0 || (meses === 0 && hoy.getDate() < fechaNacimiento.getDate())) {
+      edad--;
+    }
+
+    return edad;
+  }
 
 }

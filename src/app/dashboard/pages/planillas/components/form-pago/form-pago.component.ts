@@ -17,6 +17,7 @@ export class FormPagoComponent {
   }
 
   inputData: any;
+  date: Date = new Date();
 
   ngOnInit(): void {
     this.inputData = this.data;
@@ -26,9 +27,13 @@ export class FormPagoComponent {
     }
   }
 
+  get form() {
+    return this.pagoForm.controls;
+  }
+
   public pagoForm: FormGroup = this.fb.group({
-    fecha: ['', [Validators.required]],
-    monto: [''],
+    fecha: [this.date, [Validators.required]],
+    monto: [250, [Validators.required]],
     idPersona: [this.data.idPersona],
     idPlanilla: [this.data.idPlanilla],
   })

@@ -1,4 +1,4 @@
-import { Component, ViewChild, inject, signal } from '@angular/core';
+import { Component, ViewChild, computed, inject, signal } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -8,6 +8,7 @@ import { Planilla } from '../../interfaces/planilla';
 import { PlanillaService } from '../../services/planilla.service';
 import { FormPlanillaComponent } from './components/form-planilla/form-planilla.component';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
   selector: 'app-planillas',
@@ -15,12 +16,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./planillas.component.css']
 })
 export class PlanillasComponent {
+
+  public user:any = computed(() => this.authService.currentUser());
   constructor(private matDialog: MatDialog) {
+    console.log(this.user()?.roles);
 
   }
 
 
   private planillaService = inject(PlanillaService);
+  private authService = inject(AuthService)
   private router = inject(Router);
 
   displayedColumn: string[] = ['gestion', 'mes', 'acciones'];
@@ -39,7 +44,7 @@ export class PlanillasComponent {
     this.openDialog(id, 'Editar Beneficiario')
   }
 
-  createBeneficiary() {
+  createNewPlanilla() {
     this.openDialog(0, 'Registrar Planilla')
   }
 
@@ -116,7 +121,9 @@ export class PlanillasComponent {
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
         },
-        error: (message: string | undefined) => {
+        error: (message: any | undefined) => {
+          // console.log(message);
+
           Swal.fire('Error', message, 'error')
 
         }

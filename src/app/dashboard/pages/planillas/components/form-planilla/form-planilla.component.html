@@ -60,9 +60,9 @@
     </mat-card>
 
   </mat-dialog-content>
-  {{planillaForm.value | json}}
+  <!-- {{planillaForm.value | json}} -->
   <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button mat-dialog-close>Cancelar</button>
     <button (click)="(upload())" *ngIf="inputData.id == 0" mat-raised-button color="primary"
       [disabled]="planillaForm.invalid"><mat-icon>save</mat-icon>Registrar</button>
 

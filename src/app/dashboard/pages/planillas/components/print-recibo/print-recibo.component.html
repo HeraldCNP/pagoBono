@@ -1,160 +1,242 @@
-<mat-dialog-content class="mat-typography" id="content" #content>
-  <div class="d-flex justify-content-between ml-2 mb-0">
-    <div class="p-2">
-      <img src="/assets/img/logoGamb.png" alt="" width="110px" />
-    </div>
-    <div class="text-center mt-2 mb-0">
-      <p class="off-m">Boleta de Pago Bono Discapacidad</p>
-    </div>
-    <div class="p-3">
-      <img src="/assets/img/sisal.png" alt="" width="163px" />
-    </div>
-  </div>
-  <div *ngIf="beneficiary && beneficiaryPagado && planilla" class="cards">
-    <div class="person">
-      <h5 class="text-center">DATOS PERSONALES DEL BENEFICIARIO DE BONO DE DISCAPACIDAD</h5>
-      <table>
-        <thead>
-          <tr>
-            <th>C.I:</th>
-            <th>Nombre y Apellido:</th>
-            <th>Sexo:</th>
-            <th>Fecha de nacimiento:</th>
-            <th>Edad:</th>
-            <th>Direccion:</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{{ beneficiary.ci }} - {{ beneficiary.expedido }}</td>
-            <td>{{ beneficiary.nombres }}</td>
-            <td>{{ beneficiary.sexo }}</td>
-            <td>{{ beneficiary.fechaNacimiento | date: 'shortDate' }}</td>
-            <td>45</td>
-            <td>{{ beneficiary.direccion }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="mt-1">
-      <table>
-        <thead>
-          <tr>
-            <th>Tipo y Grado de discapacidad:</th>
-            <th>Fecha de vencimiento Carnet de Discapacidad:</th>
-            <th>Monto:</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{{ beneficiary.tipoDiscapacidad }} - {{ beneficiary.gradoDiscapacidad }}</td>
-            <td>{{ beneficiary.carnetFechaVencimiento | date: 'shortDate' }}</td>
-            <td>{{ beneficiaryPagado.monto }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="person mt-3">
-      <h5 class="text-center">DATOS DEL APODERADO</h5>
-      <table class="apo_ta">
-        <thead>
-          <tr>
-            <th>C.I:</th>
-            <th>Nombre y Apellido:</th>
-            <th>Dirección:</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{{ beneficiary.idApoderado.ci }} - {{ beneficiary.idApoderado.expedido }}</td>
-            <td>{{ beneficiary.idApoderado.nombres }}</td>
-            <td>{{ beneficiary.idApoderado.direccion }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</mat-dialog-content>
-<mat-dialog-content class="mat-typography" id="content" #content>
-  <div class="d-flex justify-content-between ml-2 mb-0">
-    <div class="p-2">
-      <img src="/assets/img/logoGamb.png" alt="" width="110px" />
-    </div>
-    <div class="text-center mt-2 mb-0">
-      <p class="off-m">Boleta de Pago Bono Discapacidad</p>
-    </div>
-    <div class="p-3">
-      <img src="/assets/img/sisal.png" alt="" width="163px" />
-    </div>
-  </div>
-  <div *ngIf="beneficiary && beneficiaryPagado && planilla" class="cards">
-    <div class="person">
-      <h5 class="text-center">DATOS PERSONALES DEL BENEFICIARIO DE BONO DE DISCAPACIDAD</h5>
-      <table>
-        <thead>
-          <tr>
-            <th>C.I:</th>
-            <th>Nombre y Apellido:</th>
-            <th>Sexo:</th>
-            <th>Fecha de nacimiento:</th>
-            <th>Edad:</th>
-            <th>Direccion:</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{{ beneficiary.ci }} - {{ beneficiary.expedido }}</td>
-            <td>{{ beneficiary.nombres }}</td>
-            <td>{{ beneficiary.sexo }}</td>
-            <td>{{ beneficiary.fechaNacimiento | date: 'shortDate' }}</td>
-            <td>45</td>
-            <td>{{ beneficiary.direccion }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="mt-1">
-      <table>
-        <thead>
-          <tr>
-            <th>Tipo y Grado de discapacidad:</th>
-            <th>Fecha de vencimiento Carnet de Discapacidad:</th>
-            <th>Monto:</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{{ beneficiary.tipoDiscapacidad }} - {{ beneficiary.gradoDiscapacidad }}</td>
-            <td>{{ beneficiary.carnetFechaVencimiento | date: 'shortDate' }}</td>
-            <td>{{ beneficiaryPagado.monto }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="person mt-3">
-      <h5 class="text-center">DATOS DEL APODERADO</h5>
-      <table class="apo_ta">
-        <thead>
-          <tr>
-            <th>C.I:</th>
-            <th>Nombre y Apellido:</th>
-            <th>Dirección:</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{{ beneficiary.idApoderado.ci }} - {{ beneficiary.idApoderado.expedido }}</td>
-            <td>{{ beneficiary.idApoderado.nombres }}</td>
-            <td>{{ beneficiary.idApoderado.direccion }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</mat-dialog-content>
 <mat-dialog-actions align="end" id="parte1">
-  <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button cdkFocusInitial (click)="printMe()">Imprimir</button>
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-raised-button printTitle="Hola" [useExistingCss]="true" color="primary" printSectionId="content"
+    ngxPrint>Imprimir</button>
 </mat-dialog-actions>
+
+<div id="content" #content>
+
+
+
+
+  <mat-dialog-content class="mat-typography">
+    <div class="card fondito1" *ngIf="beneficiary() && beneficiaryPagado() && planilla()">
+      <div class="d-flex justify-content-between ml-2 mb-0">
+        <div class="p-2">
+          <img src="/assets/img/logoGamb.png" alt="" width="175px" />
+        </div>
+        <div class="text-center ml-5 mt-2 mb-0">
+          <h2 class="off-m">Boleta de Pago Bono Discapacidad</h2>
+          <p class="off-m">Gestión: {{ planilla().gestion }} - Mes: {{ planilla().mes }}</p>
+          <!-- <p class="off-m">Expresado en Bolivianos</p> -->
+        </div>
+        <div class="p-2 ">
+          <img src="/assets/img/logoGamb.png" alt="" width="163px" />
+        </div>
+      </div>
+
+
+      <div class="container mb-2">
+        <fieldset class="border p-2 rounded fieldset-tabla">
+          <legend class="text-muted text"><b>DATOS PERSONALES DEL BENEFICIARIO</b></legend>
+          <table class="table table-striped">
+            <thead class="text-center">
+              <tr class="text">
+                <th>C.I</th>
+                <th>Nombres y Apellidos</th>
+                <th>Genero</th>
+                <th>Fecha de nacimiento</th>
+                <th>Edad</th>
+                <th>Dirección</th>
+              </tr>
+            </thead>
+            <tbody class="text-center">
+              <tr class="text">
+                <td>{{ beneficiary()?.ci }} - {{ beneficiary().expedido }}</td>
+                <td>{{ beneficiary().nombres }}</td>
+                <td>{{ beneficiary().sexo }}</td>
+                <td>{{ beneficiary().fechaNacimiento | date: 'shortDate' }}</td>
+                <td>{{ calcularEdad(beneficiary().fechaNacimiento) }}</td>
+                <td>{{ beneficiary().direccion }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </fieldset>
+      </div>
+
+      <div class="container text mb-1">
+        <fieldset class="border p-2 rounded fieldset-tabla mb-2">
+          <table class="table table-striped">
+            <thead class="text-center">
+              <tr class="text">
+                <th>Tipo y Grado de discapacidad</th>
+                <th>Fecha de vencimiento Carnet de Discapacidad</th>
+                <th>Monto</th>
+              </tr>
+            </thead>
+            <tbody class="text-center">
+              <tr class="text">
+                <td>{{ beneficiary().tipoDiscapacidad }} - {{ beneficiary().porcentajeDiscapacidad }} %</td>
+                <td>{{ beneficiary().carnetFechaVencimiento | date: 'shortDate' }}</td>
+                <td>{{ beneficiaryPagado().monto }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </fieldset>
+      </div>
+
+      <div class="container text mb-2">
+        <fieldset class="border p-1 rounded fieldset-tabla mb-2">
+          <legend class="text-muted text"><b>DATOS DEL APODERADO</b></legend>
+          <table class="table table-striped">
+            <thead class="text-center">
+              <tr class="text">
+                <th>C.I</th>
+                <th>Nombre y Apellido</th>
+                <th>Dirección</th>
+                <th>Telefono</th>
+              </tr>
+            </thead>
+            <tbody class="text-center">
+              <tr class="text">
+                <td>{{ beneficiary().idApoderado.ci }} - {{ beneficiary().idApoderado.expedido }}</td>
+                <td>{{ beneficiary().idApoderado.nombres }}</td>
+                <td>{{ beneficiary().idApoderado.direccion }}</td>
+                <td>{{ beneficiary().idApoderado.direccion }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </fieldset>
+      </div>
+
+      <div class="container mt-10">
+        <div class="d-flex justify-content-around ml-3 mb-0">
+          <div class="">
+            <div class="text-center">
+              <b>Funcionario</b>
+            </div>
+          </div>
+          <div class="">
+            <div class="text-center">
+              <b>Beneficiario</b>
+            </div>
+          </div>
+          <div class="">
+            <div class="text-center">
+              <b>Apoderado</b>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-content class="mat-typography mt-10">
+    <div class="card fondito1" *ngIf="beneficiary() && beneficiaryPagado() && planilla()">
+      <div class="d-flex justify-content-between ml-2 mb-0">
+        <div class="p-2">
+          <img src="/assets/img/logoGamb.png" alt="" width="175px" />
+        </div>
+        <div class="text-center ml-5 mt-2 mb-0">
+          <h2 class="off-m">Boleta de Pago Bono Discapacidad</h2>
+          <p class="off-m">Gestión: {{ planilla().gestion }} - Mes: {{ planilla().mes }}</p>
+          <!-- <p class="off-m">Expresado en Bolivianos</p> -->
+        </div>
+        <div class="p-2 ">
+          <img src="/assets/img/logoGamb.png" alt="" width="163px" />
+        </div>
+      </div>
+
+
+      <div class="container mb-2">
+        <fieldset class="border p-2 rounded fieldset-tabla">
+          <legend class="text-muted text"><b>DATOS PERSONALES DEL BENEFICIARIO</b></legend>
+          <table class="table table-striped">
+            <thead class="text-center">
+              <tr class="text">
+                <th>C.I</th>
+                <th>Nombres y Apellidos</th>
+                <th>Genero</th>
+                <th>Fecha de nacimiento</th>
+                <th>Edad</th>
+                <th>Dirección</th>
+              </tr>
+            </thead>
+            <tbody class="text-center">
+              <tr class="text">
+                <td>{{ beneficiary()?.ci }} - {{ beneficiary().expedido }}</td>
+                <td>{{ beneficiary().nombres }}</td>
+                <td>{{ beneficiary().sexo }}</td>
+                <td>{{ beneficiary().fechaNacimiento | date: 'shortDate' }}</td>
+                <td>{{ calcularEdad(beneficiary().fechaNacimiento) }}</td>
+                <td>{{ beneficiary().direccion }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </fieldset>
+      </div>
+
+      <div class="container text mb-1">
+        <fieldset class="border p-2 rounded fieldset-tabla mb-2">
+          <table class="table table-striped">
+            <thead class="text-center">
+              <tr class="text">
+                <th>Tipo y Grado de discapacidad</th>
+                <th>Fecha de vencimiento Carnet de Discapacidad</th>
+                <th>Monto</th>
+              </tr>
+            </thead>
+            <tbody class="text-center">
+              <tr class="text">
+                <td>{{ beneficiary().tipoDiscapacidad }} - {{ beneficiary().porcentajeDiscapacidad }} %</td>
+                <td>{{ beneficiary().carnetFechaVencimiento | date: 'shortDate' }}</td>
+                <td>{{ beneficiaryPagado().monto }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </fieldset>
+      </div>
+
+      <div class="container text mb-2">
+        <fieldset class="border p-1 rounded fieldset-tabla mb-2">
+          <legend class="text-muted text"><b>DATOS DEL APODERADO</b></legend>
+          <table class="table table-striped">
+            <thead class="text-center">
+              <tr class="text">
+                <th>C.I</th>
+                <th>Nombre y Apellido</th>
+                <th>Dirección</th>
+                <th>Telefono</th>
+              </tr>
+            </thead>
+            <tbody class="text-center">
+              <tr class="text">
+                <td>{{ beneficiary().idApoderado.ci }} - {{ beneficiary().idApoderado.expedido }}</td>
+                <td>{{ beneficiary().idApoderado.nombres }}</td>
+                <td>{{ beneficiary().idApoderado.direccion }}</td>
+                <td>{{ beneficiary().idApoderado.direccion }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </fieldset>
+      </div>
+
+      <div class="container mt-10">
+        <div class="d-flex justify-content-around ml-3 mb-0">
+          <div class="">
+            <div class="text-center">
+              <b>Funcionario</b>
+            </div>
+          </div>
+          <div class="">
+            <div class="text-center">
+              <b>Beneficiario</b>
+            </div>
+          </div>
+          <div class="">
+            <div class="text-center">
+              <b>Apoderado</b>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </mat-dialog-content>
+
+
+
+
+
+</div>
