@@ -62,12 +62,12 @@ export class FormBeneficiaryComponent {
     ci: ['', [Validators.required, Validators.minLength(7)]],
     expedido: [''],
     fechaNacimiento: [''],
-    sexo: [''],
+    sexo: ['M'],
     carnetFechaVencimiento: [''],
     tipoDiscapacidad: [''],
-    porcentajeDiscapacidad: [''],
+    porcentajeDiscapacidad: [0],
     direccion: [''],
-    celular: [''],
+    celular: [0],
     observacion: [''],
   })
 

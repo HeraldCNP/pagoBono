@@ -17,13 +17,29 @@ export class FormApoderadoComponent {
   }
 
   departamentos: any[] = [
-    { value: 'PT', label: 'Potosí' },
+    { value: 'BE', label: 'Beni' },
     { value: 'CH', label: 'Chuquisaca' },
+    { value: 'Co', label: 'Cochabamba' },
+    { value: 'LP', label: 'La Paz' },
+    { value: 'OR', label: 'Oruro' },
+    { value: 'PA', label: 'Pando' },
+    { value: 'PT', label: 'Potosí' },
+    { value: 'SC', label: 'Santa Cruz' },
+    { value: 'TJ', label: 'Tarija' },
   ];
 
   parentescos: any[] = [
-    { value: 'M', label: 'Masculino' },
-    { value: 'F', label: 'Femenino' },
+    { value: 'Padre', label: 'Padre' },
+    { value: 'Madre', label: 'Madre' },
+    { value: 'Hermano(a)', label: 'Hermano(a)' },
+    { value: 'Abuelo(a)', label: 'Abuelo(a)' },
+    { value: 'Nieto(a)', label: 'Nieto(a)' },
+    { value: 'Tio(a)', label: 'Tio(a)' },
+    { value: 'Sobrino(a)', label: 'Sobrino(a)' },
+    { value: 'Yerno(a)', label: 'Yerno(a)' },
+    { value: 'Suegro(a)', label: 'Suegro(a)' },
+    { value: 'Cuñado(a)', label: 'Cuñado(a)' },
+    { value: 'Cónyuge', label: 'Cónyuge' },
   ];
 
   inputData: any;
@@ -45,7 +61,7 @@ export class FormApoderadoComponent {
     expedido: [''],
     parentesco: [''],
     direccion: [''],
-    celular: [''],
+    celular: [0],
     idPersona: [this.data.id],
   })
 

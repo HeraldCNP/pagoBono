@@ -121,12 +121,12 @@ export class BeneficiaryListComponent {
       next: (resp: any) => {
         if (resp == 'edited') {
           this.cargarBeneficiaries();
-          Swal.fire('Bien', `Beneficiario Editado Correctamente`, 'success')
+          Swal.fire('Bien', `Apoderado Editado Correctamente`, 'success')
         }
 
         if(resp == 'created'){
           this.cargarBeneficiaries();
-          Swal.fire('Bien', `Beneficiario Creado Correctamente`, 'success')
+          Swal.fire('Bien', `Apoderado Creado Correctamente`, 'success')
         }
       },
       error: (resp: any) => {
