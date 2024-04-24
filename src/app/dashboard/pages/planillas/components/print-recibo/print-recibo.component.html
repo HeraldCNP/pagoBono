@@ -17,7 +17,7 @@
         </div>
         <div class="text-center ml-5 mt-2 mb-0">
           <h2 class="off-m">Boleta de Pago Bono Discapacidad</h2>
-          <p class="off-m">Gestión: {{ planilla().gestion }} - Mes: {{ planilla().mes }}</p>
+          <p class="off-m"> <b>Gestión:</b> {{ planilla().gestion }} - <b>Mes:</b> {{ planilla().mes }}</p>
           <!-- <p class="off-m">Expresado en Bolivianos</p> -->
         </div>
         <div class="p-2 ">
@@ -59,14 +59,16 @@
           <table class="table table-striped">
             <thead class="text-center">
               <tr class="text">
-                <th>Tipo y Grado de discapacidad</th>
-                <th>Fecha de vencimiento Carnet de Discapacidad</th>
+                <th>Tipo de discapacidad</th>
+                <th>Grado de discapacidad</th>
+                <th style="width: 30%;">Fecha de vencimiento Carnet de Discapacidad</th>
                 <th>Monto</th>
               </tr>
             </thead>
             <tbody class="text-center">
               <tr class="text">
                 <td>{{ beneficiary().tipoDiscapacidad }} - {{ beneficiary().porcentajeDiscapacidad }} %</td>
+                <td>{{ beneficiary().porcentajeDiscapacidad > 75 ? 'MUY GRAVE' : 'GRAVE' }}</td>
                 <td>{{ beneficiary().carnetFechaVencimiento | date: 'shortDate' }}</td>
                 <td>{{ beneficiaryPagado().monto }}</td>
               </tr>
@@ -89,17 +91,20 @@
             </thead>
             <tbody class="text-center">
               <tr class="text">
-                <td>{{ beneficiary().idApoderado.ci }} - {{ beneficiary().idApoderado.expedido }}</td>
-                <td>{{ beneficiary().idApoderado.nombres }}</td>
-                <td>{{ beneficiary().idApoderado.direccion }}</td>
-                <td>{{ beneficiary().idApoderado.direccion }}</td>
+                <td>{{ beneficiary().idApoderado?.ci ? beneficiary().idApoderado.ci : "N/A" }} - {{
+                  beneficiary().idApoderado?.expedido ? beneficiary().idApoderado.expedido : "N/A" }}</td>
+                <td>{{ beneficiary().idApoderado?.nombres ? beneficiary().idApoderado.nombres : "N/A" }}</td>
+                <td>{{ beneficiary().idApoderado?.direccion ? beneficiary().idApoderado.direccion : "N/A" }}</td>
+                <td>{{ beneficiary().idApoderado?.direccion }}</td>
               </tr>
             </tbody>
           </table>
         </fieldset>
+        <span><b>Fecha de Pago: </b>{{ beneficiaryPagado().fecha | date: 'fullDate' }}</span>
       </div>
 
-      <div class="container mt-10">
+
+      <div class="container mt-7">
         <div class="d-flex justify-content-around ml-3 mb-0">
           <div class="">
             <div class="text-center">
@@ -122,7 +127,7 @@
     </div>
   </mat-dialog-content>
 
-  <mat-dialog-content class="mat-typography mt-10">
+  <mat-dialog-content class="mat-typography mt-7">
     <div class="card fondito1" *ngIf="beneficiary() && beneficiaryPagado() && planilla()">
       <div class="d-flex justify-content-between ml-2 mb-0">
         <div class="p-2">
@@ -130,7 +135,7 @@
         </div>
         <div class="text-center ml-5 mt-2 mb-0">
           <h2 class="off-m">Boleta de Pago Bono Discapacidad</h2>
-          <p class="off-m">Gestión: {{ planilla().gestion }} - Mes: {{ planilla().mes }}</p>
+          <p class="off-m"> <b>Gestión:</b> {{ planilla().gestion }} - <b>Mes:</b> {{ planilla().mes }}</p>
           <!-- <p class="off-m">Expresado en Bolivianos</p> -->
         </div>
         <div class="p-2 ">
@@ -172,14 +177,16 @@
           <table class="table table-striped">
             <thead class="text-center">
               <tr class="text">
-                <th>Tipo y Grado de discapacidad</th>
-                <th>Fecha de vencimiento Carnet de Discapacidad</th>
+                <th>Tipo de discapacidad</th>
+                <th>Grado de discapacidad</th>
+                <th style="width: 30%;">Fecha de vencimiento Carnet de Discapacidad</th>
                 <th>Monto</th>
               </tr>
             </thead>
             <tbody class="text-center">
               <tr class="text">
                 <td>{{ beneficiary().tipoDiscapacidad }} - {{ beneficiary().porcentajeDiscapacidad }} %</td>
+                <td>{{ beneficiary().porcentajeDiscapacidad > 75 ? 'MUY GRAVE' : 'GRAVE' }}</td>
                 <td>{{ beneficiary().carnetFechaVencimiento | date: 'shortDate' }}</td>
                 <td>{{ beneficiaryPagado().monto }}</td>
               </tr>
@@ -202,17 +209,20 @@
             </thead>
             <tbody class="text-center">
               <tr class="text">
-                <td>{{ beneficiary().idApoderado.ci }} - {{ beneficiary().idApoderado.expedido }}</td>
-                <td>{{ beneficiary().idApoderado.nombres }}</td>
-                <td>{{ beneficiary().idApoderado.direccion }}</td>
-                <td>{{ beneficiary().idApoderado.direccion }}</td>
+                <td>{{ beneficiary().idApoderado?.ci ? beneficiary().idApoderado.ci : "N/A" }} - {{
+                  beneficiary().idApoderado?.expedido ? beneficiary().idApoderado.expedido : "N/A" }}</td>
+                <td>{{ beneficiary().idApoderado?.nombres ? beneficiary().idApoderado.nombres : "N/A" }}</td>
+                <td>{{ beneficiary().idApoderado?.direccion ? beneficiary().idApoderado.direccion : "N/A" }}</td>
+                <td>{{ beneficiary().idApoderado?.direccion }}</td>
               </tr>
             </tbody>
           </table>
         </fieldset>
+        <span><b>Fecha de Pago: </b>{{ beneficiaryPagado().fecha | date: 'fullDate' }}</span>
       </div>
 
-      <div class="container mt-10">
+
+      <div class="container mt-7">
         <div class="d-flex justify-content-around ml-3 mb-0">
           <div class="">
             <div class="text-center">
@@ -234,6 +244,11 @@
 
     </div>
   </mat-dialog-content>
+
+
+
+
+
 
 
 

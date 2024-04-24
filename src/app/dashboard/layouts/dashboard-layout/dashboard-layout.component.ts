@@ -14,7 +14,7 @@ export class DashboardLayoutComponent {
   public sidebarItems:any;
 
   constructor() {
-    console.log(this.user()?.email);
+    console.log(this.user());
 
     if(this.user().roles === 'admin'){
       this.sidebarItems = [
