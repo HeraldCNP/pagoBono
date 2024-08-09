@@ -44,7 +44,15 @@ export class BeneficiaryListComponent {
   }
 
   addApoderado(id:string){
-    this.openDialog2(id, 'Añadir Apoderado')
+    this.openDialog2(id, 'Añadir Apoderado', null)
+  }
+
+  editApoderado(id:any, idApoderado: any){
+    this.openDialog2(id, 'Editar Apoderado', idApoderado)
+  }
+
+  verApoderado(idApoderado: any) {
+    this.openDialog2(null, 'Ver Apoderado', idApoderado)
   }
 
   deleteBeneficiary(id: any) {
@@ -107,7 +115,7 @@ export class BeneficiaryListComponent {
     })
   }
 
-  openDialog2(id: any, title: any) {
+  openDialog2(id: any, title: any, idApoderado:any) {
     let dialog = this.matDialog.open(FormApoderadoComponent, {
       width: '600px',
       enterAnimationDuration: '500ms',
@@ -115,6 +123,7 @@ export class BeneficiaryListComponent {
       data: {
         id: id,
         title: title,
+        idApoderado: idApoderado,
       }
     });
     dialog.afterClosed().subscribe({

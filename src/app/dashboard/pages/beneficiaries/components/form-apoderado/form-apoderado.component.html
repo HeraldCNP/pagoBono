@@ -38,7 +38,7 @@
           <mat-label>Expedido</mat-label>
           <mat-select formControlName="expedido">
             <mat-option *ngFor="let departamento of departamentos" [value]="departamento.value">
-              {{departamento.label}}
+              {{ departamento.label }}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -47,7 +47,7 @@
           <mat-label>Parentesco</mat-label>
           <mat-select formControlName="parentesco">
             <mat-option *ngFor="let parentesco of parentescos" [value]="parentesco.value">
-              {{parentesco.label}}
+              {{ parentesco.label }}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -85,8 +85,13 @@
   </mat-dialog-content>
   {{apoderadoForm.value | json}}
   <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>Cancel</button>
-    <button (click)="(saveApoderado())" mat-raised-button color="primary" [disabled]="apoderadoForm.invalid"
-      ><mat-icon>save</mat-icon>Registrar</button>
+    <button mat-button mat-dialog-close>Cancelar</button>
+    <button *ngIf="inputData.id != null && inputData.idApoderado == null" (click)="(saveApoderado())" mat-raised-button color="primary"
+      [disabled]="apoderadoForm.invalid"><mat-icon>save</mat-icon>Registrar</button>
+
+
+    <button (click)="editApoderado(inputData.idApoderado)" *ngIf="inputData.idApoderado != null && inputData.id != null" mat-raised-button color="primary"
+      [disabled]="apoderadoForm.invalid"><mat-icon>save</mat-icon>Editar</button>
+
   </mat-dialog-actions>
 </form>

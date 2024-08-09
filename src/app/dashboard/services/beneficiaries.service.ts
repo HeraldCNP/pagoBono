@@ -79,6 +79,19 @@ export class BeneficiariesService {
     // return this.http.post<any>(url, data, { headers });
   }
 
+  getApoderadoById(id:any){
+    const url = `${this.baseUrl}/apoderados/${id}`;
+    const header = this.headers;
+    return this.http.get<any>(url, {headers: header});
+    // return this.http.get<any>(url+id, { headers });
+  }
+
+  editApoderado(data: any, id: any): Observable<any> {
+    const url = `${this.baseUrl}/apoderados/${id}`;
+    const header = this.headers;
+    return this.http.patch<any>(url, data, {headers: header});
+  }
+
   /* Servicios Tipos de Discapacidad */
 
   getAllTipos(): Observable<any> {

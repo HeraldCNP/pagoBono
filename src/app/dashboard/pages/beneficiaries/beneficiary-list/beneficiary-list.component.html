@@ -83,13 +83,25 @@
             <ng-container matColumnDef="acciones">
               <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
               <td mat-cell *matCellDef="let row" style="width: 180px;">
-                
-                <button class="iconBtn" (click)="addApoderado(row._id)" mat-icon-button matTooltip="Añadir Apoderado"
-                  aria-label="Example icon-button with a heart icon">
-                  <mat-icon>group_add</mat-icon>
-                </button>
-                <button class="iconBtn" (click)="editBeneficiary(row._id)" mat-mini-fab color="accent" matTooltip="Editar"
-                  aria-label="Example icon-button with a heart icon">
+                @if (!row.idApoderado) {
+                  <button class="iconBtn" (click)="addApoderado(row._id)" mat-icon-button matTooltip="Añadir Apoderado"
+                    aria-label="Example icon-button with a heart icon">
+                    <mat-icon>group_add</mat-icon>
+                  </button>
+                }@else{
+                  <button class="iconBtn" (click)="verApoderado(row.idApoderado._id)" mat-icon-button matTooltip="Ver Apoderado"
+                    aria-label="Example icon-button with a heart icon">
+                    <mat-icon>visibility</mat-icon>
+                  </button>
+
+                  <button class="iconBtn" (click)="editApoderado(row._id, row.idApoderado._id)" mat-icon-button matTooltip="Editar Apoderado"
+                    aria-label="Example icon-button with a heart icon">
+                    <mat-icon>edit_note</mat-icon>
+                  </button>
+                }
+
+                <button class="iconBtn" (click)="editBeneficiary(row._id)" mat-mini-fab color="accent"
+                  matTooltip="Editar Beneficiario" aria-label="Example icon-button with a heart icon">
                   <mat-icon>edit</mat-icon>
                 </button>
                 <!-- <button class="iconBtn" (click)="deleteBeneficiary(row._id)" mat-icon-button matTooltip="Eliminar"

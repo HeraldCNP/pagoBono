@@ -43,6 +43,7 @@ export class FormApoderadoComponent {
   ];
 
   inputData: any;
+  editData: any;
   idBeneficiario:any;
 
   closeDialog(data: any) {
@@ -51,8 +52,12 @@ export class FormApoderadoComponent {
 
   ngOnInit(): void {
     this.inputData = this.data;
-    this.idBeneficiario = this.inputData.id;
-    console.log(this.idBeneficiario);
+
+    if(this.inputData.idApoderado != null){
+      console.log(this.inputData.idApoderado);
+      this.loadApoderadoForId(this.inputData.idApoderado);
+    }
+
   }
 
   public apoderadoForm: FormGroup = this.fb.group({
@@ -68,6 +73,38 @@ export class FormApoderadoComponent {
   get form() {
     return this.apoderadoForm.controls;
   }
+
+  loadApoderadoForId(id: any) {
+    this.beneficiaryService.getApoderadoById(id).subscribe(item => {
+      this.editData = item;
+      // console.log(this.editData);
+      
+      this.apoderadoForm.patchValue({
+        nombres: this.editData.nombres,
+        ci: this.editData.ci,
+        expedido: this.editData.expedido,
+        parentesco: this.editData.parentesco,
+        direccion: this.editData.direccion,
+        celular: this.editData.celular,
+        idPersona: this.data.id,
+      });
+    })
+  }
+
+  editApoderado(id:any){
+    this.beneficiaryService.editApoderado(this.apoderadoForm.value, id).subscribe({
+      next: (resp: any) => {
+        this.closeDialog('edited');
+        // console.log("resp",resp);
+      },
+      error: (resp: any) => {
+        console.log(resp.error.message);
+        // Swal.fire('Error', resp, 'error')
+        // Swal.fire('Error', resp, 'error')
+      }
+    })
+  }
+
 
   saveApoderado() {
     this.beneficiaryService.createApoderado(this.apoderadoForm.value).subscribe({
