@@ -72,6 +72,7 @@ export class PlanillasComponent {
 
         if(resp == 'error'){
           this.cargarPlanillas();
+          Swal.fire('Mal', `Error al subir archivo`, 'error')
         }
       },
       error: (resp: any) => {

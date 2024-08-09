@@ -69,6 +69,13 @@ export class FormPlanillaComponent {
   }
 
   selectFile(event: any): void {
+    const fileExtension = event.target.files[0].name.split('.').pop();
+      if (fileExtension !== 'xls' || fileExtension !== 'xlsx') {
+        // Mostrar un mensaje de error o realizar otra acción
+        alert('Solo se permiten archivos .xls o xlsx');
+        this.currentFile = undefined;
+      }
+
     if (event.target.files && event.target.files[0]) {
       const file: File = event.target.files[0];
       this.currentFile = file;
@@ -101,7 +108,7 @@ export class FormPlanillaComponent {
             this.closeDialog('created');
 
           } else {
-            this.closeDialog('error');
+            // this.closeDialog('error');
             this.progress = 0;
 
             Swal.fire('Alerta', err.error.message, 'error')

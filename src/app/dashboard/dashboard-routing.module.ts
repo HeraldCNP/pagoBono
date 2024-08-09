@@ -21,6 +21,7 @@ const routes: Routes = [
       { path: 'planillas/lista/:id', component: ListaPlanillaComponent },
       { path: 'planillas/imprimir/:idPlanilla/:idBeneficiary', component: PrintRecibo2Component },
       { path: 'tiposDiscapacidad', component: TiposDiscapacidadComponent },
+      // { path: 'panel', component: TiposDiscapacidadComponent },
     ]
   }
 ];
