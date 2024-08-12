@@ -153,6 +153,10 @@ export class ListaPlanillaComponent {
     this.router.navigate(['dashboard/planillas/imprimir', this.idPlanilla, idPersona]);
   }
 
+  rellenarDatos(){
+    this.router.navigate(['dashboard/beneficiaries']);
+  }
+
 
 
 

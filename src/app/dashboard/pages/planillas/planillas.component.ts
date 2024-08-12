@@ -28,7 +28,7 @@ export class PlanillasComponent {
   private authService = inject(AuthService)
   private router = inject(Router);
 
-  displayedColumn: string[] = ['gestion', 'mes', 'acciones'];
+  displayedColumn: string[] = ['gestion', 'mes', 'monto', 'pagado', 'saldo', 'acciones'];
   dataSource!: MatTableDataSource<Planilla>
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
