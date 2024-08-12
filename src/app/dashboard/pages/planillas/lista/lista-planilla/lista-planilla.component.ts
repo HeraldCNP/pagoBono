@@ -111,7 +111,7 @@ export class ListaPlanillaComponent {
 
 
   imprimir(idPersona: any) {
-    console.log('idPersona', idPersona);
+    // console.log('idPersona', idPersona);
     // console.log('idPlanilla', this.idPlanilla);
     this.openDialogPrint(idPersona, this.idPlanilla, 'Imprimir')
   }
@@ -120,7 +120,7 @@ export class ListaPlanillaComponent {
     let dialog = this.matDialog.open(PrintReciboComponent, {
       width: '1200px',
       enterAnimationDuration: '500ms',
-      exitAnimationDuration: '1000ms',
+      exitAnimationDuration: '600ms',
       data: {
         idPersona: idPersona,
         idPlanilla: idPlanilla,

@@ -83,7 +83,7 @@
     </mat-card>
 
   </mat-dialog-content>
-  {{apoderadoForm.value | json}}
+  <!-- {{apoderadoForm.value | json}} -->
   <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close>Cancelar</button>
     <button *ngIf="inputData.id != null && inputData.idApoderado == null" (click)="(saveApoderado())" mat-raised-button color="primary"

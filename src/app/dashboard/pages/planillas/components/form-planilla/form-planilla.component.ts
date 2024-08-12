@@ -70,11 +70,11 @@ export class FormPlanillaComponent {
 
   selectFile(event: any): void {
     const fileExtension = event.target.files[0].name.split('.').pop();
-      if (fileExtension !== 'xls' || fileExtension !== 'xlsx') {
-        // Mostrar un mensaje de error o realizar otra acción
-        alert('Solo se permiten archivos .xls o xlsx');
-        this.currentFile = undefined;
-      }
+    // if (fileExtension !== 'xls' || fileExtension !== 'xlsx') {
+    //   // Mostrar un mensaje de error o realizar otra acción
+    //   alert('Solo se permiten archivos .xls o xlsx');
+    //   this.currentFile = undefined;
+    // }
 
     if (event.target.files && event.target.files[0]) {
       const file: File = event.target.files[0];
@@ -87,44 +87,81 @@ export class FormPlanillaComponent {
 
   upload(): void {
     this.progress = 0;
-    // this.message = "";
 
     if (this.currentFile) {
+      // Validate file extension
+      const allowedExtensions = ['xls', 'xlsx'];
+      const extension:any = this.currentFile.name.split('.').pop()?.toLowerCase();
+      console.log('extension', extension);
+      
+      if (!allowedExtensions.includes(extension)) {
+        Swal.fire('Error', 'Formato de archivo invalido. Por favor seleccione un archivo con el formato .xls o .xlsx.', 'error');
+        return; // Exit the function if extension is invalid
+      }
+
       this.planillaService.upload(this.currentFile, this.planillaForm).subscribe(
         (event: any) => {
           if (event.type === HttpEventType.UploadProgress) {
             this.progress = Math.round(100 * event.loaded / event.total);
-
           } else if (event instanceof HttpResponse) {
-            // this.message = event.body.message;
-            console.log(event);
-            // this.fileInfos = this.uploadService.getFiles();
-          }
-          this.closeDialog('created');
-        },
-        (err: any) => {
-          console.log('Error: ', err);
-          if (err.status == 200) {
+            console.log('Upload successful: ', event);
+            Swal.fire('Bien', event.body.sms, 'success')
             this.closeDialog('created');
-
-          } else {
-            // this.closeDialog('error');
-            this.progress = 0;
-
-            Swal.fire('Alerta', err.error.message, 'error')
-
-            if (err.error && err.error.message) {
-              this.message = err.error.message;
-            } else {
-              this.message = 'Could not upload the file!';
-            }
           }
-
-
+        },
+        (error: any) => {
+          console.error('Error uploading file:', error);
+          this.progress = 0;
           this.currentFile = undefined;
-        });
-    }
 
+          // Handle errors (consider adding more specific error handling)
+          // Swal.fire('Error', 'An error occurred during upload. Please try again later.', 'error');
+          Swal.fire('Alerta', error.error.message, 'error')
+        }
+      );
+    }
   }
+
+  // upload(): void {
+  //   this.progress = 0;
+  //   // this.message = "";
+
+  //   if (this.currentFile) {
+  //     this.planillaService.upload(this.currentFile, this.planillaForm).subscribe(
+  //       (event: any) => {
+  //         if (event.type === HttpEventType.UploadProgress) {
+  //           this.progress = Math.round(100 * event.loaded / event.total);
+
+  //         } else if (event instanceof HttpResponse) {
+  //           // this.message = event.body.message;
+  //           console.log(event);
+  //           // this.fileInfos = this.uploadService.getFiles();
+  //           this.closeDialog('created');
+  //         }
+  //       },
+  //       (err: any) => {
+  //         console.log('Error: ', err);
+  //         if (err.status == 200) {
+  //           this.closeDialog('error');
+
+  //         } else {
+  //           // this.closeDialog('error');
+  //           this.progress = 0;
+
+  //           Swal.fire('Alerta', err.error.message, 'error')
+
+  //           if (err.error && err.error.message) {
+  //             this.message = err.error.message;
+  //           } else {
+  //             this.message = 'Could not upload the file!';
+  //           }
+  //         }
+
+
+  //         this.currentFile = undefined;
+  //       });
+  //   }
+
+  // }
 
 }

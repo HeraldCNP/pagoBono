@@ -67,7 +67,6 @@ export class PlanillasComponent {
 
         if(resp == 'created'){
           this.cargarPlanillas();
-          Swal.fire('Bien', `Planilla Creada Correctamente`, 'success')
         }
 
         if(resp == 'error'){
