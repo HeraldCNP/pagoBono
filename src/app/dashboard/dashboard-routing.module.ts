@@ -8,12 +8,14 @@ import { PlanillasComponent } from './pages/planillas/planillas.component';
 import { ListaPlanillaComponent } from './pages/planillas/lista/lista-planilla/lista-planilla.component';
 import { TiposDiscapacidadComponent } from './pages/tiposDiscapacidad/tipos-discapacidad/tipos-discapacidad.component';
 import { PrintRecibo2Component } from './pages/planillas/components/print-recibo2/print-recibo2.component';
+import { DashComponent } from './pages/dash/dash.component';
 
 const routes: Routes = [
   {
     path: '',
     component: DashboardLayoutComponent,
     children: [
+      { path: '', component: DashComponent },
       { path: 'users', component: UserListComponent },
       { path: 'beneficiaries', component: BeneficiaryListComponent },
       { path: 'db', component: FileUploadComponent },
@@ -23,6 +25,7 @@ const routes: Routes = [
       { path: 'tiposDiscapacidad', component: TiposDiscapacidadComponent },
       // { path: 'panel', component: TiposDiscapacidadComponent },
     ]
+    
   }
 ];
 

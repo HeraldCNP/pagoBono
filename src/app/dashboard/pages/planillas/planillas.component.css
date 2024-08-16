@@ -6,17 +6,17 @@
 
 
 .mat-column-monto {
-    width: 200px;
+    width: 150px;
     text-align: right;
 }
 
 .mat-column-pagado {
-    width: 200px;
+    width: 150px;
     text-align: right;
 }
 
 .mat-column-saldo {
-    width: 200px;
+    width: 150px;
     text-align: right;
 }
 

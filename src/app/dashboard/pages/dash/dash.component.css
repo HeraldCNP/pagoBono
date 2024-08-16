@@ -1,0 +1,10 @@
+.my-custom-card {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+  }
+  
+  .my-custom-card-title {
+    color: #3f51b5;
+    font-weight: bold;
+  }

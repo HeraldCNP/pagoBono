@@ -35,12 +35,12 @@
             </ng-container>
 
             <ng-container matColumnDef="monto">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header>Monto Recibido</th>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Total Recibido</th>
               <td mat-cell *matCellDef="let row">{{ row.montoTotal | currency : "USD" : "" }}</td>
             </ng-container>
 
             <ng-container matColumnDef="pagado">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header>Pagado</th>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Total Pagado</th>
               <td mat-cell *matCellDef="let row">{{ row.totalPagado | currency : "USD" : "" }}</td>
             </ng-container>
 
@@ -57,10 +57,10 @@
                   aria-label="Example icon-button with a heart icon">
                   <mat-icon>list</mat-icon>
                 </button>
-                <button (click)="editBeneficiary(row._id)" mat-mini-fab color="accent" matTooltip="Editar"
+                <!-- <button (click)="editBeneficiary(row._id)" mat-mini-fab color="accent" matTooltip="Editar"
                   aria-label="Example icon-button with a heart icon">
                   <mat-icon>edit</mat-icon>
-                </button>
+                </button> -->
                 <button (click)="deleteBeneficiary(row._id)" mat-mini-fab color="warn" matTooltip="Eliminar"
                   aria-label="Example icon-button with a heart icon">
                   <mat-icon>delete</mat-icon>
