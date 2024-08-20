@@ -18,7 +18,7 @@ export class DashboardLayoutComponent {
 
     if(this.user().roles === 'admin'){
       this.sidebarItems = [
-        { label: 'BD', icon: 'storage', url: './db' },
+        { label: 'BD', icon: 'description', url: './db' },
         { label: 'Usuarios', icon: 'group', url: './users' },
         { label: 'Tipos de Discapacidad', icon: 'accessible_forward', url: './tiposDiscapacidad' },
         { label: 'Beneficiarios', icon: 'diversity_3', url: './beneficiaries' },

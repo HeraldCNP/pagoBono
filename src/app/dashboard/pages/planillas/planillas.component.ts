@@ -144,4 +144,15 @@ export class PlanillasComponent {
   showList(id:string){
     this.router.navigate(['dashboard/planillas/lista',  id ]);
   }
+
+  getInfoPlanilla(id:any){
+    this.planillaService.getInfoPlanilla(id).subscribe(blob => {
+      const url = window.URL.createObjectURL(blob);
+      window.open(url, '_blank');
+      
+    }, error => {
+      console.error('Error fetching PDF URL', error);
+    });
+  }
+
 }

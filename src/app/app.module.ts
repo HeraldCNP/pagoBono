@@ -9,6 +9,7 @@ import { SharedModule } from './shared/shared.module';
 
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
+import { BaseChartDirective, provideCharts, withDefaultRegisterables  } from 'ng2-charts';
 
 registerLocaleData(localeEs, 'es');
 @NgModule({
@@ -20,9 +21,10 @@ registerLocaleData(localeEs, 'es');
     BrowserAnimationsModule,
     AppRoutingModule,
     SharedModule,
-    HttpClientModule
+    HttpClientModule,
+    BaseChartDirective 
   ],
-  providers: [{provide: LOCALE_ID, useValue: 'es'},],
+  providers: [{provide: LOCALE_ID, useValue: 'es'}, provideCharts(withDefaultRegisterables())],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

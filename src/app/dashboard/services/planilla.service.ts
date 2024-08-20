@@ -70,4 +70,11 @@ export class PlanillaService {
   }
 
 
+  getInfoPlanilla(planillaId: string): Observable<Blob> {
+    const header = this.headers;
+
+    // return this.http.get<{ url: string }>(`${this.baseUrl}/proyect/getInfoProject/${projectId}`, { headers: header, responseType: 'blob' });
+    return this.http.get(`${this.baseUrl}/planillas/getInfoPlanilla/${planillaId}`, { headers: header, responseType: 'blob' });
+  }
+
 }
