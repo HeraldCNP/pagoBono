@@ -9,6 +9,7 @@ import { ListaPlanillaComponent } from './pages/planillas/lista/lista-planilla/l
 import { TiposDiscapacidadComponent } from './pages/tiposDiscapacidad/tipos-discapacidad/tipos-discapacidad.component';
 import { PrintRecibo2Component } from './pages/planillas/components/print-recibo2/print-recibo2.component';
 import { DashComponent } from './pages/dash/dash.component';
+import { ReportOneComponent } from './pages/reportes/report-one/report-one.component';
 
 const routes: Routes = [
   {
@@ -23,7 +24,7 @@ const routes: Routes = [
       { path: 'planillas/lista/:id', component: ListaPlanillaComponent },
       { path: 'planillas/imprimir/:idPlanilla/:idBeneficiary', component: PrintRecibo2Component },
       { path: 'tiposDiscapacidad', component: TiposDiscapacidadComponent },
-      // { path: 'panel', component: TiposDiscapacidadComponent },
+      { path: 'reportes', component: ReportOneComponent },
     ]
     
   }

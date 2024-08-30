@@ -24,7 +24,10 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -54,6 +57,9 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     MatTableModule,
     MatToolbarModule,
     MatTooltipModule,
+    MatRadioModule,
+    MatSlideToggleModule,
+    MatCheckboxModule
   ]
 })
 export class MaterialModule { }

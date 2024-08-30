@@ -65,6 +65,7 @@ export class PlanillaService {
     const req = new HttpRequest('POST', `${this.baseUrl}/persona/actPersona`, formData,  {
       reportProgress: true,
       responseType: 'json',
+      headers: header
     });
     return this.http.request(req);
   }
@@ -73,8 +74,14 @@ export class PlanillaService {
   getInfoPlanilla(planillaId: string): Observable<Blob> {
     const header = this.headers;
 
-    // return this.http.get<{ url: string }>(`${this.baseUrl}/proyect/getInfoProject/${projectId}`, { headers: header, responseType: 'blob' });
     return this.http.get(`${this.baseUrl}/planillas/getInfoPlanilla/${planillaId}`, { headers: header, responseType: 'blob' });
+  }
+
+  printPlanilla(planillaId: string): Observable<Blob> {
+    const header = this.headers;
+
+    // return this.http.get<{ url: string }>(`${this.baseUrl}/proyect/getInfoProject/${projectId}`, { headers: header, responseType: 'blob' });
+    return this.http.get(`${this.baseUrl}/planillas/getPlanilla/${planillaId}`, { headers: header, responseType: 'blob' });
   }
 
 }

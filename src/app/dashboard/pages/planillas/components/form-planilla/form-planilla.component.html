@@ -37,7 +37,7 @@
 
         <mat-form-field class="full-width">
           <input matInput [value]="fileName" />
-          <input type="file" id="fileInput" (change)="selectFile($event)" name="fileInput" />
+          <input type="file" id="fileInput" (change)="selectFile($event)" name="fileInput" accept=".xls,.xlsx" />
         </mat-form-field>
 
 

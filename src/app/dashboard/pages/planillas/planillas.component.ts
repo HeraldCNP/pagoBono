@@ -155,4 +155,14 @@ export class PlanillasComponent {
     });
   }
 
+  printPlanilla(id:any){
+    this.planillaService.printPlanilla(id).subscribe(blob => {
+      const url = window.URL.createObjectURL(blob);
+      window.open(url, '_blank');
+      
+    }, error => {
+      console.error('Error fetching PDF URL', error);
+    });
+  }
+
 }
