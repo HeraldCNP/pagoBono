@@ -34,7 +34,7 @@ export class DashboardLayoutComponent {
         { label: 'Tipos de Discapacidad', icon: 'accessible_forward', url: './tiposDiscapacidad' },
         { label: 'Beneficiarios', icon: 'diversity_3', url: './beneficiaries' },
         { label: 'Planillas', icon: 'search', url: './planillas' },
-
+        { label: 'Reportes', icon: 'search', url: './reportes' },
         // { label: 'listado', icon: 'label', url: './list' }
         // { label: 'listado', icon: 'label', url: './list' }
       ]
