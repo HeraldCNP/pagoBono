@@ -18,12 +18,13 @@ export class DashboardLayoutComponent {
 
     if(this.user().roles === 'admin'){
       this.sidebarItems = [
-        { label: 'BD', icon: 'description', url: './db' },
+        { label: 'Inicio', icon: 'home', url: './' },
+        // { label: 'BD', icon: 'description', url: './db' },
         { label: 'Usuarios', icon: 'group', url: './users' },
         { label: 'Tipos de Discapacidad', icon: 'accessible_forward', url: './tiposDiscapacidad' },
         { label: 'Beneficiarios', icon: 'diversity_3', url: './beneficiaries' },
         { label: 'Planillas', icon: 'format_indent_increase', url: './planillas' },
-        { label: 'Reportes', icon: 'format_indent_increase', url: './reportes' },
+        { label: 'Reportes', icon: 'search', url: './reportes' },
 
         // { label: 'listado', icon: 'label', url: './list' }
         // { label: 'listado', icon: 'label', url: './list' }
@@ -32,7 +33,7 @@ export class DashboardLayoutComponent {
       this.sidebarItems = [
         { label: 'Tipos de Discapacidad', icon: 'accessible_forward', url: './tiposDiscapacidad' },
         { label: 'Beneficiarios', icon: 'diversity_3', url: './beneficiaries' },
-        { label: 'Planillas', icon: 'format_indent_increase', url: './planillas' },
+        { label: 'Planillas', icon: 'search', url: './planillas' },
 
         // { label: 'listado', icon: 'label', url: './list' }
         // { label: 'listado', icon: 'label', url: './list' }

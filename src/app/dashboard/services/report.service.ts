@@ -31,7 +31,7 @@ export class ReportService {
 
   getReport(params?: any): Observable<any> {
     const url = `${this.baseUrl}/planillas/query/all`;
-    console.log(url);
+    console.log(params);
     
     const header = this.headers;
     let httpParams = new HttpParams();
@@ -47,6 +47,14 @@ export class ReportService {
 
     // return this.http.get(`${this.baseUrl}/planillas/query/all1`, { params: httpParams, headers: header, responseType: 'blob' });
   }
+
+  generateBoleta(ci: string): Observable<Blob> {
+    const header = this.headers;
+
+    // return this.http.get<{ url: string }>(`${this.baseUrl}/proyect/getInfoProject/${projectId}`, { headers: header, responseType: 'blob' });
+    return this.http.get(`${this.baseUrl}/planillas/getControlPago/filter?ci=${ci}`, { headers: header, responseType: 'blob' });
+  }
+
 }
 
 
