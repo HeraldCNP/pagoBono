@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { PlanillaService } from 'src/app/dashboard/services/planilla.service';
 
+
 @Component({
   selector: 'app-form-pago',
   templateUrl: './form-pago.component.html',

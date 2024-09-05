@@ -18,7 +18,9 @@ export class SelectYearComponent {
   constructor() {}
 
   ngOnInit(): void {
-    this.generateYears(25); // Generar los últimos N años, puedes cambiar este valor según sea necesario
+    this.generateYears(10); // Generar los últimos N años, puedes cambiar este valor según sea necesario
+    console.log(this.clases);
+    
   }
 
   generateYears(n: any): void {

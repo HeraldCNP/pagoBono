@@ -9,18 +9,7 @@
           <input type="email" matInput placeholder="Correo Electronico" formControlName="email">
         </mat-form-field> -->
 
-        <mat-form-field class="full-width">
-          <mat-label>Gestion</mat-label>
-          <mat-select formControlName="gestion">
-            <mat-option *ngFor="let gestion of gestiones" [value]="gestion.value">
-              {{gestion.label}}
-            </mat-option>
-          </mat-select>
-          <mat-icon matSuffix>calendar_month</mat-icon>
-          <mat-error *ngIf="form['gestion'].hasError('required') && form['gestion'].touched">
-            La Gestion es obligatoria.
-          </mat-error>
-        </mat-form-field>
+        <app-select-year [control]="planillaForm.get('gestion')" [texto]="'Gestión'" [clases]="'full-width'"></app-select-year>
 
         <mat-form-field class="full-width">
           <mat-label>Mes</mat-label>
@@ -38,6 +27,10 @@
         <mat-form-field class="full-width">
           <input matInput [value]="fileName" />
           <input type="file" id="fileInput" (change)="selectFile($event)" name="fileInput" accept=".xls,.xlsx" />
+          <br>
+          {{ progress }}  %
+          <mat-progress-bar *ngIf="progress > 0" mode="determinate" [value]="progress">
+          </mat-progress-bar>
         </mat-form-field>
 
 
@@ -64,7 +57,7 @@
   <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close>Cancelar</button>
     <button (click)="(upload())" *ngIf="inputData.id == 0" mat-raised-button color="primary"
-      [disabled]="planillaForm.invalid"><mat-icon>save</mat-icon>Registrar</button>
+      [disabled]="planillaForm.invalid"><mat-icon>save</mat-icon>Cargar</button>
 
   </mat-dialog-actions>
 </form>

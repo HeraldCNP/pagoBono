@@ -6,7 +6,7 @@ import { MaterialModule } from '../material/material.module';
 import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-layout.component';
 import { UserListComponent } from './pages/users/user-list/user-list.component';
 import { FormUserComponent } from './components/form-user/form-user.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BeneficiaryListComponent } from './pages/beneficiaries/beneficiary-list/beneficiary-list.component';
 import { FormBeneficiaryComponent } from './pages/beneficiaries/components/form-beneficiary/form-beneficiary.component';
 import { FileUploadComponent } from './pages/file-upload/file-upload.component';
@@ -20,6 +20,7 @@ import { TiposDiscapacidadComponent } from './pages/tiposDiscapacidad/tipos-disc
 import { FormTipoComponent } from './pages/tiposDiscapacidad/tipos-discapacidad/components/form-tipo/form-tipo.component';
 import { PrintRecibo2Component } from './pages/planillas/components/print-recibo2/print-recibo2.component';
 import { NgxPrintModule } from 'ngx-print';
+import { SelectYearComponent } from '../components/select-year/select-year.component';
 
 
 
@@ -46,7 +47,9 @@ import { NgxPrintModule } from 'ngx-print';
     DashboardRoutingModule,
     MaterialModule,
     ReactiveFormsModule,
-    NgxPrintModule
+    NgxPrintModule,
+    FormsModule, 
+    SelectYearComponent
   ]
 })
 export class DashboardModule { }

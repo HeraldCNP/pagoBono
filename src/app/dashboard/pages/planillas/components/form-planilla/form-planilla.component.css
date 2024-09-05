@@ -5,7 +5,7 @@
 }
 
 .full-width {
-  width: 100%;
+  width: 100% !important;
 }
 
 .inline {
@@ -14,4 +14,9 @@
 
 .right{
   padding: 10px;
+}
+
+
+.mat-mdc-form-field{
+  width: 100%;
 }

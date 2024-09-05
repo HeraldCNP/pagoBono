@@ -24,7 +24,7 @@
 
         <mat-form-field class="full-width">
           <mat-label>Monto</mat-label>
-          <input type="number" matInput placeholder="Monto" formControlName="monto">
+          <input type="number" matInput readonly placeholder="Monto" formControlName="monto" >
           <mat-icon matSuffix>paid</mat-icon>
           <mat-error *ngIf="form['monto'].hasError('required') && form['monto'].touched">
             El Monto es Obligatorio

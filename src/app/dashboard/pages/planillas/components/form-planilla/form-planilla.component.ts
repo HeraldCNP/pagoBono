@@ -12,28 +12,25 @@ import Swal from 'sweetalert2';
 })
 export class FormPlanillaComponent {
   private fb = inject(FormBuilder);
+  
   private planillaService = inject(PlanillaService);
-
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private ref: MatDialogRef<FormPlanillaComponent>) {
-
-  }
 
   inputData: any;
   fileName = 'Seleccione un Archivo en formato .xls';
   currentFile?: File;
   progress = 0;
   message = '';
+  planillaForm: any;
 
-  gestiones: any[] = [
-    { value: 2026, label: '2026' },
-    { value: 2025, label: '2025' },
-    { value: 2024, label: '2024' },
-    { value: 2023, label: '2023' },
-    { value: 2022, label: '2022' },
-    { value: 2021, label: '2021' },
-    { value: 2020, label: '2020' },
-    { value: 2019, label: '2019' },
-  ];
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private ref: MatDialogRef<FormPlanillaComponent>) {
+    this.planillaForm = this.fb.group({
+      gestion: ['', [Validators.required]],
+      mes: ['', [Validators.required]],
+    })
+  }
+
+
+
 
   meses: any[] = [
     { value: 'Enero', label: 'Enero' },
@@ -59,10 +56,9 @@ export class FormPlanillaComponent {
 
   }
 
-  public planillaForm: FormGroup = this.fb.group({
-    gestion: ['', [Validators.required]],
-    mes: ['', [Validators.required]],
-  })
+
+
+
 
   get form() {
     return this.planillaForm.controls;
@@ -80,6 +76,7 @@ export class FormPlanillaComponent {
       const file: File = event.target.files[0];
       this.currentFile = file;
       this.fileName = this.currentFile.name;
+      this.progress = 0;
     } else {
       this.fileName = 'Seleccione un archivo en Formato .xls';
     }
@@ -121,6 +118,7 @@ export class FormPlanillaComponent {
       );
     }
   }
+
 
   // upload(): void {
   //   this.progress = 0;
