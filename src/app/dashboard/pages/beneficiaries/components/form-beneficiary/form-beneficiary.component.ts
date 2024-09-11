@@ -22,10 +22,7 @@ export class FormBeneficiaryComponent {
     { value: 'F', label: 'Femenino' },
   ];
 
-  discapacidades: any[] = [
-    { value: 'M', label: 'Masculino' },
-    { value: 'F', label: 'Femenino' },
-  ];
+
 
   departamentos: any[] = [
     { value: 'BE', label: 'Beni' },
@@ -126,7 +123,7 @@ export class FormBeneficiaryComponent {
   }
 
   editBeneficiary(id:any){
-    this.beneficiaryService.editBeneficiary(this.beneficiaryForm.value, id).subscribe({
+    this.beneficiaryService.editBeneficiary(this.beneficiaryForm.value, id).subscribe({    
       next: (resp: any) => {
         this.closeDialog('edited');
         // console.log("resp",resp);

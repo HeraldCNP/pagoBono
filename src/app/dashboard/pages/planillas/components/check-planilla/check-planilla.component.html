@@ -1,0 +1,26 @@
+<form class="create-form" [formGroup]="planillaForm">
+    <h2 mat-dialog-title>{{ inputData.title }}</h2>
+    <mat-dialog-content class="mat-typography">
+  
+      <mat-card class="">
+        <mat-card-content>
+
+            <p>Se aprobará la planilla del mes de {{inputData.planilla.mes}} del {{inputData.planilla.gestion}} con el monto de <strong>{{inputData.planilla.montoTotal | currency : "USD" : ""}}</strong></p>
+
+          <mat-form-field class="full-width">
+            <mat-label>Número de preventivo</mat-label>
+            <input type="number" matInput placeholder="Número de preventivo" formControlName="preventivo">
+          </mat-form-field>
+
+        </mat-card-content>
+      </mat-card>
+  
+    </mat-dialog-content>
+    {{planillaForm.value | json}}
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close>Cancelar</button>
+      <button (click)="(aprobarPlanilla())" mat-raised-button color="primary" [disabled]="planillaForm.invalid"><mat-icon>save</mat-icon>Aprobar</button>
+  
+    </mat-dialog-actions>
+  </form>
+  

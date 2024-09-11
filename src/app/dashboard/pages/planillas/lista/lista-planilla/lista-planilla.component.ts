@@ -33,7 +33,7 @@ export class ListaPlanillaComponent {
 
 
 
-  displayedColumn: string[] = ['beneficiario', 'ci', 'estado', 'acciones'];
+  displayedColumn: string[] = ['beneficiario', 'ci', 'estadoPago', 'acciones'];
   dataSource!: MatTableDataSource<Habilitado>
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;

@@ -1,6 +1,8 @@
 import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { Chart, ChartType } from 'chart.js/auto';
+import { groupBy, map, Observable, of, reduce } from 'rxjs';
 import { BeneficiariesService } from 'src/app/dashboard/services/beneficiaries.service';
+import { PlanillaService } from 'src/app/dashboard/services/planilla.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -13,24 +15,71 @@ import Swal from 'sweetalert2';
 export class LineChartComponent implements OnInit {
   public chart: Chart | undefined;
   private beneficiaryService = inject(BeneficiariesService)
+  private planillaService = inject(PlanillaService)
+
   beneficiaries = signal<any>(null);
+  planillas = signal<any>(null);
   conteoDiscapacidades = signal<any>(null);
   datos: any;
   nombresDiscapacidades: string[] = [];
   cantidadesDiscapacidades: number[] = [];
 
+  meses: string[] = [];
+  cantidadHabilitados: number[] = [];
+  cantidadPagado: number[] = [];
+
+  data: any[] = [];
+
 
   ngOnInit(): void {
-    this.cargarBeneficiaries();
+    this.cargarPlanillas();
+    // this.cargarBeneficiaries();
   }
+  
+  cargarPlanillas(params?: any) {
+    
+    this.planillaService.getAllPlanillas(params)
+      .subscribe({
+        next: (data: any) => {
+          this.planillas.set(data);
+          console.log(this.planillas());
+          this.data = this.planillas();
 
+          const groupedData = new Map<string, { habilitados: number, totalPagado: number }>();
+          this.data.forEach(item => {
+            console.log(item);
+            
+            if (!groupedData.has(item.mes)) {
+              groupedData.set(item.mes, { habilitados: 0, totalPagado: 0 });
+            }
+            groupedData.get(item.mes)!.habilitados += item.Habilitados.length;
+            groupedData.get(item.mes)!.totalPagado += item.totalPagado/250;
+          });
+      
+          groupedData.forEach((value, key) => {
+            this.meses.push(key);
+            this.cantidadHabilitados.push(value.habilitados);
+            this.cantidadPagado.push(value.totalPagado);
+          });
+
+          console.log(this.meses, this.cantidadHabilitados, this.cantidadPagado);
+          this.renderChart(this.meses, this.cantidadHabilitados, this.cantidadPagado);
+        },
+        error: (message: any | undefined) => {
+          // console.log(message);
+
+          Swal.fire('Error', message, 'error')
+
+        }
+      })
+  }
 
   cargarBeneficiaries() {
     this.beneficiaryService.getAllUsers()
       .subscribe({
         next: (data: any) => {
           this.beneficiaries.set(data);
-          console.log(this.beneficiaries());
+          // console.log(this.beneficiaries());
           this.datos = this.disabilityCounts();
           if (this.datos != null) {
             // this.datos.map((value: any) => {
@@ -45,7 +94,7 @@ export class LineChartComponent implements OnInit {
               this.cantidadesDiscapacidades.push(this.datos[propiedad]);
             }
 
-            this.renderChart(this.nombresDiscapacidades, this.cantidadesDiscapacidades);
+            this.renderChart(this.nombresDiscapacidades, this.cantidadesDiscapacidades, this.cantidadesDiscapacidades);
           }
 
 
@@ -57,7 +106,7 @@ export class LineChartComponent implements OnInit {
       })
   }
 
-  renderChart(labels: any, data: any) {
+  renderChart(labels: any, data: any , data2?: any) {
     const myChart = new Chart("myChart", {
       type: 'bar',
       data: {
@@ -72,18 +121,18 @@ export class LineChartComponent implements OnInit {
           {
             label: 'Habilitados',
             data: data,
-            borderColor: '#ffcd56',
-            backgroundColor: '#ffcd56',
-            hoverBorderWidth: 5,
-            hoverBorderColor: 'green',
+            borderColor: '#000000',
+            backgroundColor: '#FFA500',
+            hoverBorderWidth: 2,
+            hoverBorderColor: '000000',
           },
           {
             label: 'Pagados',
-            data: data,
-            borderColor: '#20b2aa',
-            backgroundColor: '#20b2aa',
-            hoverBorderWidth: 5,
-            hoverBorderColor: 'green',
+            data: data2,
+            borderColor: '#000000',
+            backgroundColor: '#008000',
+            hoverBorderWidth: 2,
+            hoverBorderColor: '000000',
           }
         ]
       },
@@ -91,6 +140,13 @@ export class LineChartComponent implements OnInit {
         scales: {
           y: {
             beginAtZero: true
+          }
+        },
+        responsive: true,
+        plugins: {
+          title: {
+            display: true,
+            text: 'Detalle por Meses'
           }
         }
       }

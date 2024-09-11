@@ -1,0 +1,22 @@
+.create-form {
+    min-width: 150px;
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  .full-width {
+    width: 100% !important;
+  }
+  
+  .inline {
+    width: 50%;
+  }
+  
+  .right{
+    padding: 10px;
+  }
+  
+  
+  .mat-mdc-form-field{
+    width: 100%;
+  }

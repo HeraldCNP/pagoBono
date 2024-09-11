@@ -29,11 +29,11 @@
               <td mat-cell *matCellDef="let row">{{ row.ci }}</td>
             </ng-container>
 
-            <ng-container matColumnDef="estado">
+            <ng-container matColumnDef="estadoPago">
               <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
               <td mat-cell *matCellDef="let row">
-                <span *ngIf="row.estado == 'PENDIENTE'" class="badge bg-danger">{{row.estado}}</span>
-                <span *ngIf="row.estado == 'PAGADO'" class="badge bg-success">{{row.estado}}</span>
+                <span *ngIf="row.estadoPago == 'PENDIENTE'" class="badge bg-danger">{{row.estadoPago}}</span>
+                <span *ngIf="row.estadoPago == 'PAGADO'" class="badge bg-success">{{row.estadoPago}}</span>
               </td>
             </ng-container>
 

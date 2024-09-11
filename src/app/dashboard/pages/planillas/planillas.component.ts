@@ -9,6 +9,7 @@ import { PlanillaService } from '../../services/planilla.service';
 import { FormPlanillaComponent } from './components/form-planilla/form-planilla.component';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { CheckPlanillaComponent } from './components/check-planilla/check-planilla.component';
 
 @Component({
   selector: 'app-planillas',
@@ -29,7 +30,7 @@ export class PlanillasComponent {
   private router = inject(Router);
 
 
-  displayedColumn: string[] = ['gestion', 'mes', 'monto', 'pagado', 'saldo', 'acciones'];
+  displayedColumn: string[] = ['gestion', 'mes', 'preventivo', 'monto', 'pagado', 'saldo', 'acciones'];
   dataSource!: MatTableDataSource<Planilla>
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -38,12 +39,16 @@ export class PlanillasComponent {
 
 
   ngOnInit(): void {
-    this.cargarPlanillas();
+
+    if(this.user()?.roles == 'caja'){
+      let param = { estado : 'APROBADO' };
+      this.cargarPlanillas(param);
+    }else{
+      this.cargarPlanillas();
+    }
   }
 
-  editBeneficiary(id: any) {
-    this.openDialog(id, 'Editar Beneficiario')
-  }
+
 
   createNewPlanilla() {
     this.openDialog(0, 'Registrar Planilla')
@@ -77,12 +82,11 @@ export class PlanillasComponent {
       },
       error: (resp: any) => {
         console.log(resp.error.message);
-
       }
     })
   }
 
-  deleteBeneficiary(id: any) {
+  deletePlanilla(id: any) {
     Swal.fire({
       title: "Estas seguro?",
       text: "¡No podrás revertir esto!",
@@ -93,27 +97,60 @@ export class PlanillasComponent {
       confirmButtonText: "¡Sí, bórralo!"
     }).then((result) => {
       if (result.isConfirmed) {
-        // this.planillaService.deleteBeneficiary(id)
-        // .subscribe({
-        //   next: () => {
-        //     this.cargarBeneficiaries();
-        //   },
-        //   error: (message: string | undefined) => {
-        //     Swal.fire('Error', message, 'error')
-        //   }
-        // })
-        // Swal.fire({
-        //   title: "¡Eliminado!",
-        //   text: "Beneficiario ha sido eliminado.",
-        //   icon: "success"
-        // });
+        this.planillaService.deletePlanilla(id)
+        .subscribe({
+          next: () => {
+            this.cargarPlanillas();
+          },
+          error: (message: string | undefined) => {
+            Swal.fire('Error', message, 'error')
+          }
+        })
+        Swal.fire({
+          title: "¡Eliminado!",
+          text: "Beneficiario ha sido eliminado.",
+          icon: "success"
+        });
       }
     });
-
   }
 
-  cargarPlanillas() {
-    this.planillaService.getAllPlanillas()
+  aprobarPlanilla(idPlanilla: any) {
+    this.openDialog2(idPlanilla, 'Aprobar Planilla');
+  }
+
+  openDialog2(planilla: any, title: any) {
+    let dialog = this.matDialog.open(CheckPlanillaComponent, {
+      width: '600px',
+      enterAnimationDuration: '500ms',
+      exitAnimationDuration: '1000ms',
+      data: {
+        planilla: planilla,
+        title: title,
+      }
+    });
+    dialog.afterClosed().subscribe({
+      next: (resp: any) => {
+        if (resp == 'edited') {
+          this.cargarPlanillas();
+          Swal.fire('Bien', `Planilla aprobada correctamente`, 'success')
+        }
+
+        if(resp == 'error'){
+          this.cargarPlanillas();
+          Swal.fire('Mal', `Error al subir archivo`, 'error')
+        }
+      },
+      error: (resp: any) => {
+        console.log(resp.error.message);
+      }
+    })
+  }
+
+
+  cargarPlanillas(params?: any) {
+    
+    this.planillaService.getAllPlanillas(params)
       .subscribe({
         next: (data: any) => {
           this.planillas.set(data);

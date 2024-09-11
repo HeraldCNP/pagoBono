@@ -61,7 +61,7 @@ export class PieChartComponent {
       .subscribe({
         next: (data: any) => {
           this.beneficiaries.set(data);
-          console.log(this.beneficiaries());
+          // console.log(this.beneficiaries());
           this.datos = this.disabilityCounts();
           const coloresUsados = new Set();
           for (let propiedad in this.datos) {

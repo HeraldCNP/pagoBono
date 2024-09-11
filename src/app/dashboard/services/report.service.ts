@@ -31,7 +31,7 @@ export class ReportService {
 
   getReport(params?: any): Observable<any> {
     const url = `${this.baseUrl}/planillas/query/all`;
-    console.log(params);
+    // console.log(params);
     
     const header = this.headers;
     let httpParams = new HttpParams();

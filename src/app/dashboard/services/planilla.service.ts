@@ -1,4 +1,4 @@
-import { HttpClient, HttpEvent, HttpHeaders, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpHeaders, HttpParams, HttpRequest } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -30,11 +30,20 @@ export class PlanillaService {
     return headers;
   }
 
-  getAllPlanillas(): Observable<any> {
+  getAllPlanillas(params?: any): Observable<any> {
+    
     const url = `${this.baseUrl}/planillas`;
     const header = this.headers;
-    // console.log(url);
-    return this.http.get<any>(url, { headers: header });
+    let httpParams = new HttpParams();
+    if (params) {
+      Object.keys(params).forEach(key => {
+        if (params[key]) {
+          httpParams = httpParams.set(key, params[key]);
+        }
+      });
+    }
+    console.log(url);
+    return this.http.get<any>(url, { params: httpParams, headers: header });
   }
 
   getPlanilla(id:string): Observable<any> {
@@ -83,5 +92,18 @@ export class PlanillaService {
     // return this.http.get<{ url: string }>(`${this.baseUrl}/proyect/getInfoProject/${projectId}`, { headers: header, responseType: 'blob' });
     return this.http.get(`${this.baseUrl}/planillas/getPlanilla/${planillaId}`, { headers: header, responseType: 'blob' });
   }
+
+  deletePlanilla(planillaId: string): Observable<any> {
+    const url = `${this.baseUrl}/planillas/${planillaId}`;
+    const header = this.headers;
+    return this.http.delete<any>(url, {headers: header});
+  } 
+
+  editPlanilla(data: any, id: any): Observable<any> {
+    const url = `${this.baseUrl}/planillas/${id}`;
+    const header = this.headers;
+    return this.http.patch<any>(url, data, {headers: header});
+  }
+
 
 }

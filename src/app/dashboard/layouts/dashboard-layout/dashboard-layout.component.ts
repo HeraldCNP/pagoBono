@@ -16,29 +16,55 @@ export class DashboardLayoutComponent {
   constructor() {
     console.log(this.user());
 
-    if(this.user().roles === 'admin'){
+    switch(this.user().roles){
+      case 'admin':
       this.sidebarItems = [
         { label: 'Inicio', icon: 'home', url: './' },
-        // { label: 'BD', icon: 'description', url: './db' },
         { label: 'Usuarios', icon: 'group', url: './users' },
         { label: 'Tipos de Discapacidad', icon: 'accessible_forward', url: './tiposDiscapacidad' },
         { label: 'Beneficiarios', icon: 'diversity_3', url: './beneficiaries' },
         { label: 'Planillas', icon: 'format_indent_increase', url: './planillas' },
         { label: 'Pagar beneficiario', icon: 'paid', url: './reportes' },
-
-        // { label: 'listado', icon: 'label', url: './list' }
-        // { label: 'listado', icon: 'label', url: './list' }
-      ]
-    } else {
-      this.sidebarItems = [
+      ] 
+      break; 
+      case 'presupuestos': this.sidebarItems = [  
+        { label: 'Inicio', icon: 'home', url: './' },
+        { label: 'Planillas', icon: 'format_indent_increase', url: './planillas' },
+      ]  
+      break;
+      case 'caja': this.sidebarItems = [
+        { label: 'Inicio', icon: 'home', url: './' },
         { label: 'Tipos de Discapacidad', icon: 'accessible_forward', url: './tiposDiscapacidad' },
         { label: 'Beneficiarios', icon: 'diversity_3', url: './beneficiaries' },
         { label: 'Planillas', icon: 'format_indent_increase', url: './planillas' },
         { label: 'Pagar beneficiario', icon: 'paid', url: './reportes' },
-        // { label: 'listado', icon: 'label', url: './list' }
-        // { label: 'listado', icon: 'label', url: './list' }
       ]
+      break;
     }
+
+    // if(this.user().roles === 'admin'){
+    //   this.sidebarItems = [
+    //     { label: 'Inicio', icon: 'home', url: './' },
+    //     // { label: 'BD', icon: 'description', url: './db' },
+    //     { label: 'Usuarios', icon: 'group', url: './users' },
+    //     { label: 'Tipos de Discapacidad', icon: 'accessible_forward', url: './tiposDiscapacidad' },
+    //     { label: 'Beneficiarios', icon: 'diversity_3', url: './beneficiaries' },
+    //     { label: 'Planillas', icon: 'format_indent_increase', url: './planillas' },
+    //     { label: 'Pagar beneficiario', icon: 'paid', url: './reportes' },
+
+    //     // { label: 'listado', icon: 'label', url: './list' }
+    //     // { label: 'listado', icon: 'label', url: './list' }
+    //   ]
+    // } else {
+    //   this.sidebarItems = [
+    //     { label: 'Tipos de Discapacidad', icon: 'accessible_forward', url: './tiposDiscapacidad' },
+    //     { label: 'Beneficiarios', icon: 'diversity_3', url: './beneficiaries' },
+    //     { label: 'Planillas', icon: 'format_indent_increase', url: './planillas' },
+    //     { label: 'Pagar beneficiario', icon: 'paid', url: './reportes' },
+    //     // { label: 'listado', icon: 'label', url: './list' }
+    //     // { label: 'listado', icon: 'label', url: './list' }
+    //   ]
+    // }
 
   }
 
