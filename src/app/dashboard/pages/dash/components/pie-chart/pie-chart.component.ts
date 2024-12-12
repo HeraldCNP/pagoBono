@@ -97,7 +97,7 @@ export class PieChartComponent {
 
 
   renderChart(labels: any, data: any) {
-
+    
     const myChart = new Chart("pieChart", {
       type: 'pie',
       data: {

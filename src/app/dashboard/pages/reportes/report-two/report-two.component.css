@@ -1,0 +1,9 @@
+.mr {
+    margin-right: 25px;
+}
+
+/* En tu archivo de estilos (por ejemplo, styles.css) */
+
+.mat-mdc-radio-button.mat-accent {
+    --mdc-radio-selected-icon-color: green;
+}

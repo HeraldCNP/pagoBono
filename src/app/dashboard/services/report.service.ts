@@ -15,7 +15,7 @@ export class ReportService {
 
   constructor() { }
 
-  get token(){
+  get token() {
     const token = localStorage.getItem('token');
     if (!token) {
       this.authService.logout();
@@ -23,7 +23,7 @@ export class ReportService {
     return token;
   }
 
-  get headers(){
+  get headers() {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
     return headers;
   }
@@ -32,7 +32,26 @@ export class ReportService {
   getReport(params?: any): Observable<any> {
     const url = `${this.baseUrl}/planillas/query/all`;
     // console.log(params);
-    
+
+    const header = this.headers;
+    let httpParams = new HttpParams();
+    if (params) {
+      Object.keys(params).forEach(key => {
+        if (params[key]) {
+          httpParams = httpParams.set(key, params[key]);
+        }
+      });
+    }
+    return this.http.get<any>(url, { params: httpParams, headers: header });
+
+
+    // return this.http.get(`${this.baseUrl}/planillas/query/all1`, { params: httpParams, headers: header, responseType: 'blob' });
+  }
+
+  getPlanillas(params?: any): Observable<any> {
+    const url = `${this.baseUrl}/planillas`;
+    // console.log(params);
+
     const header = this.headers;
     let httpParams = new HttpParams();
     if (params) {
@@ -55,7 +74,32 @@ export class ReportService {
     return this.http.get(`${this.baseUrl}/planillas/getControlPago/filter?ci=${ci}`, { headers: header, responseType: 'blob' });
   }
 
+  imprimir(params?: any): Observable<Blob> {
+    const header = this.headers;
+    let httpParams = new HttpParams();
+    if (params) {
+      Object.keys(params).forEach(key => {
+        if (params[key]) {
+          httpParams = httpParams.set(key, params[key]);
+        }
+      });
+    }
+    // return this.http.get<{ url: string }>(`${this.baseUrl}/proyect/getInfoProject/${projectId}`, { headers: header, responseType: 'blob' });
+    return this.http.get(`${this.baseUrl}/planillas/query/getPlanillaGeneral`, { params: httpParams, headers: header, responseType: 'blob' });
+  }
+
+  imprimirEstado(params?: any): Observable<Blob> {
+    const header = this.headers;
+    let httpParams = new HttpParams();
+    if (params) {
+      Object.keys(params).forEach(key => {
+        if (params[key]) {
+          httpParams = httpParams.set(key, params[key]);
+        }
+      });
+    }
+    return this.http.get(`${this.baseUrl}/planillas/query/getPlanillaEstado`, { params: httpParams, headers: header, responseType: 'blob' });
+  }
+
+  // return this.http.get(`${this.baseUrl}/planillas/query/all1`, { params: httpParams, headers: header, responseType: 'blob' });
 }
-
-
-

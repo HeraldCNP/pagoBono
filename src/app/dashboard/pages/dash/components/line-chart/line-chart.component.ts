@@ -28,6 +28,12 @@ export class LineChartComponent implements OnInit {
   cantidadHabilitados: number[] = [];
   cantidadPagado: number[] = [];
 
+  totalHabilitados: number = 0;
+  totalPagado: number = 0;
+  totalPorPagar: number = 0;
+  namesProcentajes: string[] = [];
+  dataProcentajes: number[] = [];
+
   data: any[] = [];
 
 
@@ -35,9 +41,9 @@ export class LineChartComponent implements OnInit {
     this.cargarPlanillas();
     // this.cargarBeneficiaries();
   }
-  
+
   cargarPlanillas(params?: any) {
-    
+
     this.planillaService.getAllPlanillas(params)
       .subscribe({
         next: (data: any) => {
@@ -48,14 +54,14 @@ export class LineChartComponent implements OnInit {
           const groupedData = new Map<string, { habilitados: number, totalPagado: number }>();
           this.data.forEach(item => {
             console.log(item);
-            
+
             if (!groupedData.has(item.mes)) {
               groupedData.set(item.mes, { habilitados: 0, totalPagado: 0 });
             }
             groupedData.get(item.mes)!.habilitados += item.Habilitados.length;
-            groupedData.get(item.mes)!.totalPagado += item.totalPagado/250;
+            groupedData.get(item.mes)!.totalPagado += item.totalPagado / 250;
           });
-      
+
           groupedData.forEach((value, key) => {
             this.meses.push(key);
             this.cantidadHabilitados.push(value.habilitados);
@@ -63,7 +69,22 @@ export class LineChartComponent implements OnInit {
           });
 
           console.log(this.meses, this.cantidadHabilitados, this.cantidadPagado);
+          this.totalHabilitados = this.cantidadHabilitados.reduce((total, numero) => total + numero, 0);
+          // console.log('Total Habilitados', this.totalHabilitados);
+          this.totalPagado = this.cantidadPagado.reduce((total, numero) => total + numero, 0);
+          // console.log('Total Pagado', this.totalPagado);
+          this.totalPorPagar = this.totalHabilitados - this.totalPagado;
+          // console.log('Total Por Pagar', this.totalPorPagar);
+          let porcentajePagado = (this.totalPagado / this.totalHabilitados) * 100;
+          console.log('Porcentaje Pagado', porcentajePagado);
+          let porcentajePorPagar = (this.totalPorPagar / this.totalHabilitados) * 100;
+          console.log('Porcentaje Por Pagar', porcentajePorPagar);
+
+          this.namesProcentajes = ['Total Pagado %', 'Total Por Pagar %'];
+          this.dataProcentajes = [porcentajePagado, porcentajePorPagar];
+
           this.renderChart(this.meses, this.cantidadHabilitados, this.cantidadPagado);
+          this.renderChartPie2(this.namesProcentajes , this.dataProcentajes);
         },
         error: (message: any | undefined) => {
           // console.log(message);
@@ -106,7 +127,7 @@ export class LineChartComponent implements OnInit {
       })
   }
 
-  renderChart(labels: any, data: any , data2?: any) {
+  renderChart(labels: any, data: any, data2?: any) {
     const myChart = new Chart("myChart", {
       type: 'bar',
       data: {
@@ -161,6 +182,36 @@ export class LineChartComponent implements OnInit {
     }, {} as Record<string, number>);
   });
 
+
+  renderChartPie2(labels: any, data: any) {
+
+    const myChart = new Chart("pieChart2", {
+      type: 'pie',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: '',
+            data: data,
+            backgroundColor: ['#228B22', '#FF4500'],
+            borderColor: '#FFFFFF',
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'left',
+          },
+          title: {
+            display: true,
+            text: 'Procentaje de Pago de Bono de Discapacidad'
+          }
+        }
+      }
+    });
+  }
 
 
   // newChartLine() {

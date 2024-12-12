@@ -24,7 +24,8 @@ export class DashboardLayoutComponent {
         { label: 'Tipos de Discapacidad', icon: 'accessible_forward', url: './tiposDiscapacidad' },
         { label: 'Beneficiarios', icon: 'diversity_3', url: './beneficiaries' },
         { label: 'Planillas', icon: 'format_indent_increase', url: './planillas' },
-        { label: 'Pagar beneficiario', icon: 'paid', url: './reportes' },
+        { label: 'Pagar beneficiario', icon: 'paid', url: './pagar' },
+        { label: 'Reportes', icon: 'picture_as_pdf', url: './reportes' },
       ] 
       break; 
       case 'presupuestos': this.sidebarItems = [  
@@ -37,7 +38,8 @@ export class DashboardLayoutComponent {
         { label: 'Tipos de Discapacidad', icon: 'accessible_forward', url: './tiposDiscapacidad' },
         { label: 'Beneficiarios', icon: 'diversity_3', url: './beneficiaries' },
         { label: 'Planillas', icon: 'format_indent_increase', url: './planillas' },
-        { label: 'Pagar beneficiario', icon: 'paid', url: './reportes' },
+        { label: 'Pagar beneficiario', icon: 'paid', url: './pagar' },
+        { label: 'Reportes', icon: 'picture_as_pdf', url: './reportes' },
       ]
       break;
     }

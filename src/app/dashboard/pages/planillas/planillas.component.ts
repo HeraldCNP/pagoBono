@@ -186,7 +186,7 @@ export class PlanillasComponent {
   getInfoPlanilla(id:any){
     this.planillaService.getInfoPlanilla(id).subscribe(blob => {
       const url = window.URL.createObjectURL(blob);
-      window.open(url, '_blank');
+      window.open(url);
       
     }, error => {
       console.error('Error fetching PDF URL', error);
