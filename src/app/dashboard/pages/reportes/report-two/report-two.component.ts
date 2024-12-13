@@ -43,7 +43,7 @@ export class ReportTwoComponent {
     this.searchForm = this.fb.group({
       gestion: [''],
       mes: [''],
-      estadoPago: [true],
+      estadoPago: ['PENDIENTE'],
     })
   }
 
