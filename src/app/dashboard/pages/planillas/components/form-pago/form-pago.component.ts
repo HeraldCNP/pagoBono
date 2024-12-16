@@ -17,6 +17,8 @@ export class FormPagoComponent {
 
   }
 
+  isSubmitting = false;
+
   inputData: any;
   date: Date = new Date();
 
@@ -40,14 +42,22 @@ export class FormPagoComponent {
   })
 
   registerPago(){
+    if (this.isSubmitting) {
+      return; // Evita múltiples ejecuciones
+    }
+
+    this.isSubmitting = true; // Desactiva el botón
+
     this.planillaService.registerPago(this.pagoForm.value).subscribe({
       next: (resp: any) => {
         // this.closeDialog('created');
         console.log(resp);
         this.closeDialog('created');
+        // this.isSubmitting = false; // Reactiva el botón tras el éxito
       },
       error: (resp: any) => {
         console.log(resp.error.message);
+        // this.isSubmitting = false; // Reactiva el botón tras el éxito
         // Swal.fire('Error', resp, 'error')
         // Swal.fire('Error', resp, 'error')
       }
