@@ -28,6 +28,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import {MatTabsModule} from '@angular/material/tabs';
 
 
 @NgModule({
@@ -59,7 +60,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatTooltipModule,
     MatRadioModule,
     MatSlideToggleModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatTabsModule
   ]
 })
 export class MaterialModule { }

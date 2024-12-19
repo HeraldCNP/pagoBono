@@ -1,110 +1,165 @@
 <div class="container mt-2">
-    <div class="row">
-      <div class="col-md">
-        <mat-card class="my-custom-card">
-          <mat-card-header>
-            <mat-card-title my-custom-card-title>Pagar Beneficiario</mat-card-title>
-            <!-- <mat-card-subtitle>Usuarios</mat-card-subtitle> -->
-          </mat-card-header>
-          <mat-card-content>
-            <form [formGroup]="searchForm">
-  
-  
-              <app-select-year [control]="searchForm.get('gestion')" [clases]="'small-input'"
-                [texto]="'Gestión'"></app-select-year>
-  
-                <mat-form-field class="full-width">
-                  <mat-label>Mes</mat-label>
-                  <mat-select formControlName="mes">
-                    <mat-option *ngFor="let mes of meses" [value]="mes.value">
-                      {{mes.label}}
-                    </mat-option>
-                  </mat-select>
-                  <mat-icon matSuffix>calendar_month</mat-icon>
-                </mat-form-field>
-  
-              <!-- <mat-radio-group class="mr" aria-label="Select an option" formControlName="estadoPago">
+  <div class="row">
+    <div class="col-md">
+      <mat-card class="my-custom-card">
+        <mat-card-header>
+          <mat-card-title my-custom-card-title>Reportes</mat-card-title>
+          <!-- <mat-card-subtitle>Usuarios</mat-card-subtitle> -->
+        </mat-card-header>
+        <mat-card-content>
+          <form [formGroup]="searchForm">
+
+
+            <app-select-year [control]="searchForm.get('gestion')" [clases]="'small-input'"
+              [texto]="'Gestión'"></app-select-year>
+
+            <mat-form-field class="full-width">
+              <mat-label>Mes</mat-label>
+              <mat-select formControlName="mes">
+                <mat-option *ngFor="let mes of meses" [value]="mes.value">
+                  {{mes.label}}
+                </mat-option>
+              </mat-select>
+              <mat-icon matSuffix>calendar_month</mat-icon>
+            </mat-form-field>
+
+            <!-- <mat-radio-group class="mr" aria-label="Select an option" formControlName="estadoPago">
                 <mat-radio-button value="PENDIENTE" checked>PENDIENTE</mat-radio-button>
                 <mat-radio-button value="PAGADO">PAGADO</mat-radio-button>
               </mat-radio-group> -->
-  
-              Estado Pago:<mat-checkbox (change)="onCheckboxChange($event)" checked>{{ flag | uppercase }}</mat-checkbox>
-  
-              
-              <!-- <button class="mx-2" appLoader mat-raised-button color="primary" (click)="onSearch()">Buscar</button>
+
+            Estado Pago:<mat-checkbox (change)="onCheckboxChange($event)" checked>{{ flag | uppercase }}</mat-checkbox>
+
+
+            <!-- <button class="mx-2" appLoader mat-raised-button color="primary" (click)="onSearch()">Buscar</button>
                           <button class="mx-2" appLoader mat-raised-button (click)="reset()">Borrar</button> -->
-            </form>
-            <!-- {{ searchForm.value | json }} -->
-          </mat-card-content>
-          <mat-card-actions>
-            
-            <button class="mx-4" style="width: 100%;" mat-raised-button [disabled]="!searchForm.valid" (click)="getPlanillas(searchForm.value)" color="primary"  mat-button>Buscar</button>
-            <button class="mx-4" style="width: 100%;" mat-raised-button [disabled]="!searchForm.valid" color="accent" (click)="imprimir(searchForm.value)" mat-button>Imprimir Resumen</button>
-            <button style="width: 100%;" mat-raised-button [disabled]="!searchForm.valid" (click)="imprimirEstado(searchForm.value)" mat-button>Imprimir Detalle</button>
-          </mat-card-actions>
-        </mat-card>
-        <mat-card>
-          <mat-card-header>
-            <mat-card-title *ngIf="persona">Lista de planillas en estado {{ flag2 }} del beneficiario: {{ persona.nombres }}</mat-card-title>
-            <!-- <mat-card-subtitle>End</mat-card-subtitle> -->
-            <span class="spacer"></span>
-  
-    
-          </mat-card-header>
-          <mat-divider></mat-divider>
-          <mat-card-content>
-            <div class="container">
-              <table mat-table matSort [dataSource]="dataSource">
-                <!-- displayedColumn: string[] = ['gestion', 'mes', 'habilitados', 'pagados', 'porPagar', 'monto', 'cancelado', 'saldo', '%', 'acciones']; -->
-                <ng-container matColumnDef="gestion" class="centered-header">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Gestión</th>
-                  <td mat-cell *matCellDef="let row">{{ row.gestion }}</td>
-                </ng-container>
-    
-                <ng-container matColumnDef="mes">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Mes</th>
-                  <td mat-cell *matCellDef="let row">{{row.mes}}</td>
-                </ng-container>
 
-                <ng-container matColumnDef="habilitados">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Habilitados</th>
-                  <td mat-cell *matCellDef="let row">{{ row.Habilitados.length }}</td>
-                </ng-container> 
+            <button class="mx-2" mat-raised-button [disabled]="!searchForm.valid" (click)="getPlanillas(searchForm.value)"
+              color="primary" mat-button>Buscar</button>
+          </form>
+          <!-- {{ searchForm.value | json }} -->
 
-                <ng-container matColumnDef="pagados">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Pagados</th>
-                  <td mat-cell *matCellDef="let row">{{ row.totalPagado/250 }}</td>
-                </ng-container> 
+        </mat-card-content>
+        <div class="row">
+          <div class="col-md">
+            <mat-card class="my-custom-card">
+              <mat-card-header>
+                <mat-card-title my-custom-card-title>BENEFICIARIOS</mat-card-title>
+                <mat-card-subtitle>Listado</mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-actions>
+                <button class="buttonColor" mat-button><mat-icon class="iconRed">picture_as_pdf</mat-icon> Exportar
+                  PDF</button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+        
+          <div class="col-md">
+            <mat-card class="my-custom-card">
+              <mat-card-header>
+                <mat-card-title my-custom-card-title>RESUMEN GENERAL</mat-card-title>
+                <mat-card-subtitle>Seleccionar gestión y/o mes</mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-actions>
+                <button class="buttonColor" mat-raised-button [disabled]="!searchForm.valid"
+                  (click)="imprimir(searchForm.value)" mat-button> <mat-icon class="iconRed">picture_as_pdf</mat-icon>
+                  Exportar PDF </button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
 
-                <ng-container matColumnDef="porPagar">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Por Pagar</th>
-                  <td mat-cell *matCellDef="let row">{{ row.Habilitados.length - row.totalPagado/250 }}</td>
-                </ng-container> 
+          <div class="col-md">
+            <mat-card class="my-custom-card">
+              <mat-card-header>
+                <mat-card-title my-custom-card-title>ESTADO DE PAGO</mat-card-title>
+                <mat-card-subtitle>Seleccionar entre "pendiente" o "pagado"</mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-actions>
+                <button class="buttonColor" mat-raised-button [disabled]="!searchForm.valid"
+                  (click)="imprimirEstado(searchForm.value)" mat-button><mat-icon
+                    class="iconRed">picture_as_pdf</mat-icon> Exportar PDF</button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
 
-                <ng-container matColumnDef="monto">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Monto</th>
-                  <td mat-cell *matCellDef="let row">{{ row.montoTotal }}</td>
-                </ng-container> 
+          <div class="col-md">
+            <mat-card class="my-custom-card">
+              <mat-card-header>
+                <mat-card-title my-custom-card-title>TIPOS DE DISCAPACIDAD</mat-card-title>
+                <mat-card-subtitle>Listado</mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-actions>
+                <button class="buttonColor" mat-button><mat-icon class="iconRed">picture_as_pdf</mat-icon> Exportar
+                  PDF</button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+        </div>
+      </mat-card>
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title *ngIf="persona">Lista de planillas en estado {{ flag2 }} del beneficiario: {{ persona.nombres
+            }}</mat-card-title>
+          <!-- <mat-card-subtitle>End</mat-card-subtitle> -->
+          <span class="spacer"></span>
 
-                <ng-container matColumnDef="cancelado">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Cancelado</th>
-                  <td mat-cell *matCellDef="let row">{{ row.totalPagado }}</td>
-                </ng-container> 
 
-                <ng-container matColumnDef="saldo">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Saldo</th>
-                  <td mat-cell *matCellDef="let row">{{ row.montoTotal - row.totalPagado }}</td>
-                </ng-container> 
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <mat-card-content>
+          <div class="container">
+            <table mat-table matSort [dataSource]="dataSource">
+              <!-- displayedColumn: string[] = ['gestion', 'mes', 'habilitados', 'pagados', 'porPagar', 'monto', 'cancelado', 'saldo', '%', 'acciones']; -->
+              <ng-container matColumnDef="gestion" class="centered-header">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Gestión</th>
+                <td mat-cell *matCellDef="let row">{{ row.gestion }}</td>
+              </ng-container>
 
-                <ng-container matColumnDef="%">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header>%</th>
-                  <td mat-cell *matCellDef="let row">{{ ((row.Habilitados.length - row.totalPagado/250) / row.Habilitados.length) * 100 | number : '1.2-2' }} %</td>
-                </ng-container> 
-    
-                <ng-container matColumnDef="acciones">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
-                  <td mat-cell *matCellDef="let row">
-                    <!-- @if (flag2 == 'PENDIENTE') {
+              <ng-container matColumnDef="mes">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Mes</th>
+                <td mat-cell *matCellDef="let row">{{row.mes}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="habilitados">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Habilitados</th>
+                <td mat-cell *matCellDef="let row">{{ row.Habilitados.length }}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="pagados">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Pagados</th>
+                <td mat-cell *matCellDef="let row">{{ row.totalPagado/250 }}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="porPagar">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Por Pagar</th>
+                <td mat-cell *matCellDef="let row">{{ row.Habilitados.length - row.totalPagado/250 }}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="monto">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Monto</th>
+                <td mat-cell *matCellDef="let row">{{ row.montoTotal }}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="cancelado">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Cancelado</th>
+                <td mat-cell *matCellDef="let row">{{ row.totalPagado }}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="saldo">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Saldo</th>
+                <td mat-cell *matCellDef="let row">{{ row.montoTotal - row.totalPagado }}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="%">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>%</th>
+                <td mat-cell *matCellDef="let row">{{ ((row.Habilitados.length - row.totalPagado/250) /
+                  row.Habilitados.length) * 100 | number : '1.2-2' }} %</td>
+              </ng-container>
+
+              <ng-container matColumnDef="acciones">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
+                <td mat-cell *matCellDef="let row">
+                  <!-- @if (flag2 == 'PENDIENTE') {
                       @if (persona.fechaNacimiento) {
                         <ng-container>
                           <button mat-mini-fab color="accent" matTooltip="Pagar"
@@ -122,21 +177,21 @@
                         </ng-container>
                       }
                     } -->
-                  </td>
-                </ng-container>
-    
-                <tr mat-header-row *matHeaderRowDef="displayedColumn"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumn"></tr>
-    
-                <tr *matNoDataRow>
-                  <!-- <td class="mat-cell">"{{ termino.value }}" No existe</td> -->
-                </tr>
-              </table>
-              <mat-paginator [pageSizeOptions]="[10 ,25 , 50]" aria-label="Select Page of Users"></mat-paginator>
-            </div>
-          </mat-card-content>
-        </mat-card>
-      </div>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumn"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumn"></tr>
+
+              <tr *matNoDataRow>
+                <!-- <td class="mat-cell">"{{ termino.value }}" No existe</td> -->
+              </tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[10 ,25 , 50]" aria-label="Select Page of Users"></mat-paginator>
+          </div>
+        </mat-card-content>
+      </mat-card>
     </div>
-    
   </div>
+
+</div>

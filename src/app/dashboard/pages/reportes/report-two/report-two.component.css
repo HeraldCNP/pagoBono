@@ -7,3 +7,12 @@
 .mat-mdc-radio-button.mat-accent {
     --mdc-radio-selected-icon-color: green;
 }
+
+.iconRed{
+    color: red;
+}
+
+.buttonColor{
+    background-color: skyblue;
+    width: 100%;
+}
